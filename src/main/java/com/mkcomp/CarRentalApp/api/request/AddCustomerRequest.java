@@ -101,4 +101,5 @@ public class AddCustomerRequest {
     public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
+
 }

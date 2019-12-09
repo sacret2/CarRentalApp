@@ -21,6 +21,10 @@ public class Address {
         return postalCode;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }

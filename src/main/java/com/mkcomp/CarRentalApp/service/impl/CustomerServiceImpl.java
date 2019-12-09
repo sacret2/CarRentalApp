@@ -1,12 +1,15 @@
 package com.mkcomp.CarRentalApp.service.impl;
 
 import com.mkcomp.CarRentalApp.api.request.AddCustomerRequest;
+import com.mkcomp.CarRentalApp.api.request.LoginRequest;
 import com.mkcomp.CarRentalApp.model.Address;
 import com.mkcomp.CarRentalApp.model.Customer;
 import com.mkcomp.CarRentalApp.repository.AddressRepository;
 import com.mkcomp.CarRentalApp.repository.CustomerRepository;
 import com.mkcomp.CarRentalApp.service.CustomerService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CustomerServiceImpl implements CustomerService {
     private AddressRepository addressRepository;
     private CustomerRepository customerRepository;
@@ -14,6 +17,18 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerServiceImpl(AddressRepository addressRepository, CustomerRepository customerRepository) {
         this.addressRepository = addressRepository;
         this.customerRepository = customerRepository;
+    }
+
+    @Override
+    public Customer findCustomerById(long id) {
+        return customerRepository.getOne(id);
+    }
+
+    @Override
+    public Customer findCustomerByUserNameAndPassword(LoginRequest request) {
+        String userName = request.getUserName();
+        String password = request.getPassword();
+        return customerRepository.findCustomerByUserNameAndPassword(userName, password);
     }
 
     @Override
