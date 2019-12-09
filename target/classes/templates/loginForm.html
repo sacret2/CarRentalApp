@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:include="template :: index_head">
+</head>
+<body>
+<nav th:replace="template :: navbar"></nav>
+<div align="center">
+    <h2>Login Form</h2>
+    <hr>
+    <br>
+    <form action="#" th:action="@{/login}" th:object="${loginRequest}" method="GET">
+        <input type="text" th:field="*{userName}" placeholder="User Name" class="form-control mb-4 col-4" />
+        <input type="text" th:field="*{password}" placeholder="Password" class="form-control mb-4 col-4"/>
+        <button type="submit" class="btn btn-info col-2">Login</button>
+    </form>
+</div>
+<footer th:replace="template :: app_footer"></footer>
+</body>
+</html>
