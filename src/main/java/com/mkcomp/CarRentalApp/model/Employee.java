@@ -1,9 +1,6 @@
 package com.mkcomp.CarRentalApp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Employee extends User {
@@ -18,6 +15,10 @@ public class Employee extends User {
     private String password;
     private String position;
     private boolean isAdmin;
+
+    @OneToOne
+    @JoinColumn(name = "branch_id")
+    private Branch branch;
 
     public String getFirstName() {
         return firstName;

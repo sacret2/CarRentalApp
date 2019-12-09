@@ -8,6 +8,7 @@ import com.mkcomp.CarRentalApp.repository.CarRepository;
 import com.mkcomp.CarRentalApp.service.CarService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,16 @@ public class CarServiceImpl implements CarService {
         Branch branch = extractBranchFromRepository(request.getBranchId());
         Car car = addCarToDataSource(request, branch);
         return car.getId();
+    }
+
+    @Override
+    public List<Car> findAll() {
+        return carRepository.findAll();
+    }
+
+    @Override
+    public void deleteCarById(long id) {
+        carRepository.deleteById(id);
     }
 
     private Branch extractBranchFromRepository(Long branchId) {

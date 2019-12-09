@@ -49,12 +49,13 @@ public class HomeController {
     public String loginUser(@ModelAttribute("loginRequest") LoginRequest request, Model model) {
         Employee employee = employeeService.findEmployeeByUserNameAndPassword(request);
         if (employee != null) {
-            model.addAttribute("employee", employee);
+            model.addAttribute("user", employee);
+            if (employee.isAdmin()) return "admin/panel";
             return "employee/panel";
         }
         Customer customer = customerService.findCustomerByUserNameAndPassword(request);
         if (customer != null) {
-            model.addAttribute("customer", customer);
+            model.addAttribute("user", customer);
             return "customer/panel";
         }
         return "invalid-login";
