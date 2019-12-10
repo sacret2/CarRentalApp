@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="index_head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>HomePage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="../../static/css/navbar.css" th:href="@{css/navbar.css}" rel="stylesheet" />
+    <link href="../static/css/styles.css" th:href="@{../static/css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+    <nav th:fragment="navbar" class="navbar navbar-dark bg-dark">
+        <div class="logo">
+            M&K
+        </div>
+        <div class="headerDiv">
+            Index
+        </div>
+        <div align="right" class="rightUpperConrerDiv">
+            <a href="logOut" class = "btn btn-primary btn-sm">logout</a>
+        </div>
+    </nav>
+    <header  class = "app-header">
+        <div class="logo">
+            M&K
+        </div>
+        <div class="headerDiv">
+            Index
+        </div>
+        <div align="right" class="rightUpperCornerDiv">
+            <a href="loginForm" class = "btn btn-primary btn-sm">login</a>
+            <a href="register" class = "btn btn-info btn-sm">register</a>
+        </div>
+    </header >
+    <footer th:fragment="app_footer" class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">M&K Company    Customer Service   email: mk@mk.com,   tel: (+22) 42 32 535,   fax: (+22) 24 35 546</span>
+        </div>
+        <script type="text/javascript" th:src="@{js/jquery-3.4.1.js}"></script>
+    </footer>
+</body>
+</html>

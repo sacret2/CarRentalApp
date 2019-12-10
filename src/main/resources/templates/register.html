@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:include="template :: index_head"></head>
+<head>
+</head>
+<body>
+<nav th:replace="template :: navbar"></nav>
+<div align="center">
+    <h2>Register Form</h2>
+    <hr>
+    <br>
+    <form action="#" th:action="@{/customer/register}" th:object="${addCustomerRequest}" method="POST">
+
+        <input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control mb-4 col-4" />
+        <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{userName}" placeholder="User Name" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{password}" placeholder="Password" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{postalCode}" placeholder="Postal Code" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{street}" placeholder="Street" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{streetNumber}" placeholder="Street Number" class="form-control mb-4 col-4"/>
+
+        <button type="submit" onclick="hideLoginButton()" class="btn btn-info col-2">Register</button>
+
+    </form>
+
+</div>
+<script type="text/javascript" th:src = "@{js/script.js}"></script>
+<footer th:replace="template :: app_footer"></footer>
+</body>
+</html>

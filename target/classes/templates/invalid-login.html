@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:include="template :: index_head">
+<body>
+<nav th:replace="template :: navbar"></nav>
+<div align="center">
+<h3>The login or password is invalid or there is no such user within database</h3>
+<hr>
+<a href="/" class = "btn btn-info btn-sm">Return to Homepage</a>
+<a href="loginForm" class = "btn btn-info btn-sm">Login Form</a>
+</div>
+<footer th:replace="template :: app_footer"></footer>
+</body>
+</html>
