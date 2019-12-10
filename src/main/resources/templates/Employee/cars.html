@@ -8,23 +8,25 @@
 <div align="center">
     <a th:href="@{/employee/cars/addCar}" class="btn btn-primary btn-sm mb-3">Add Car</a>
 <table border ="1">
-    <thead>
+    <thead style="text-align: center">
         <tr>
             <th>Brand</th>
             <th>Model</th>
             <th>Production Year</th>
             <th>Specification</th>
             <th>Base Price Per Day</th>
+            <th>Branch Location</th>
             <th>Action</th>
         </tr>
     </thead>
 <tbody>
-<tr th:each="tempCar : ${cars}">
+<tr class="table table-striped" th:each="tempCar : ${cars}">
     <td th:text="${tempCar.brand}"/>
     <td th:text="${tempCar.model}"/>
     <td th:text="${tempCar.productionYear}"/>
     <td th:text="${tempCar.specification}"/>
     <td th:text="${tempCar.basePricePerDay}"/>
+    <td th:text="${tempCar.branch.address.city} +' '+ ${tempCar.branch.address.street} +' '+ ${tempCar.branch.address.streetNumber}"/>
     <td>
         <a th:href="@{/employee/cars/update(carId=${tempCar.id})}" class="btn btn-info btn-sm">Update</a>
         <a th:href="@{/employee/cars/delete(carId=${tempCar.id})}" class="btn btn-danger btn-sm"

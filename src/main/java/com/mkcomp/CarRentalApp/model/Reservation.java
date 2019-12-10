@@ -22,7 +22,4 @@ public class Reservation {
     @JoinColumn(name = "customer_id")
     private Customer customer;
     private double cost;
-    private double advancePayment;
-    private boolean wasAdvancePaid;
-
 }

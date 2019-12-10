@@ -6,10 +6,12 @@
 <nav th:replace="template :: navbar"></nav>
 <br>
 
-<a th:href="@{/employee/cars}" class="btn btn-primary btn-lg">Cars</a>
-<a th:href="@{/employee/reservations}" class="btn btn-info btn-lg">Reservations</a>
-<a th:href="@{/employee/rentals}" class="btn btn-primary btn-lg">Rentals</a>
-<a th:href="@{/employee/invoices}" class="btn btn-info btn-lg">Invoices</a>
+<div align="center">
+    <a th:href="@{/employee/cars}" class="btn btn-primary btn-lg">Cars</a>
+    <a th:href="@{/employee/reservations}" class="btn btn-info btn-lg">Reservations</a>
+    <a th:href="@{/employee/rentals}" class="btn btn-primary btn-lg">Rentals</a>
+    <a th:href="@{/employee/invoices}" class="btn btn-info btn-lg">Invoices</a>
+</div>
 
 <footer th:replace="template :: app_footer"></footer>
 </body>

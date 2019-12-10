@@ -36,7 +36,7 @@ public class AdminController {
         return "admin/panel";
     }
 
-    @RequestMapping("/employees/addEmployee")
+    @RequestMapping("addEmployee")
     public String addEmployee(Model model){
         AddEmployeeRequest request = new AddEmployeeRequest();
         model.addAttribute("addEmployeeRequest", request);
