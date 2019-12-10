@@ -79,7 +79,7 @@ public class EmployeeController {
     @PostMapping("/saveCar")
     public String saveCar(@ModelAttribute("addCarRequest") AddCarRequest request){
         carService.addCar(request);
-        return "employee/panel";
+        return "employee/cars";
     }
 
     @RequestMapping("/")
