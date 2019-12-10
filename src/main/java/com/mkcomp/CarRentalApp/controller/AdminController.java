@@ -1,5 +1,6 @@
 package com.mkcomp.CarRentalApp.controller;
 
+import com.mkcomp.CarRentalApp.api.request.AddBranchRequest;
 import com.mkcomp.CarRentalApp.api.request.AddCarRequest;
 import com.mkcomp.CarRentalApp.api.request.AddEmployeeRequest;
 import com.mkcomp.CarRentalApp.model.Branch;
@@ -31,12 +32,19 @@ public class AdminController {
         return "admin/employees";
     }
 
+    @RequestMapping("/branches")
+    public String viewBranches(Model model){
+        List<Branch> branches = branchService.findAll();
+        model.addAttribute("branches", branches);
+        return "admin/branches";
+    }
+
     @RequestMapping("/panel")
     public String viewPanel(){
         return "admin/panel";
     }
 
-    @RequestMapping("addEmployee")
+    @RequestMapping("/employees/addEmployee")
     public String addEmployee(Model model){
         AddEmployeeRequest request = new AddEmployeeRequest();
         model.addAttribute("addEmployeeRequest", request);
@@ -45,9 +53,22 @@ public class AdminController {
         return "admin/addEmployee";
     }
 
+    @RequestMapping("/branches/addBranch")
+    public String addBranch(Model model){
+        AddBranchRequest request = new AddBranchRequest();
+        model.addAttribute("addBranchRequest", request);
+        return "admin/addBranch";
+    }
+
     @PostMapping("/employees/saveEmployee")
     public String saveEmployee(@ModelAttribute("addEmployeeRequest") AddEmployeeRequest request){
         employeeService.addEmployee(request);
+        return "admin/panel";
+    }
+
+    @PostMapping("/branches/saveBranch")
+    public String saveBranch(@ModelAttribute("addBranchRequest") AddBranchRequest request){
+        branchService.addBranch(request);
         return "admin/panel";
     }
 
@@ -57,10 +78,40 @@ public class AdminController {
         return "admin/panel";
     }
 
+    @GetMapping("/branches/delete")
+    public String deleteBranch(@RequestParam("branchId") long id){
+        branchService.deleteBranchById(id);
+        return "admin/panel";
+    }
+
     @GetMapping("/employees/update")
     public String updateEmployee(@RequestParam("employeeId") long id, Model model){
-
+        Employee employee = employeeService.getEmployeeById(id);
+        AddEmployeeRequest request = new AddEmployeeRequest();
+        request.setBranchId(employee.getBranch().getId());
+        request.setFirstName(employee.getFirstName());
+        request.setLastName(employee.getLastName());
+        request.setPassword(employee.getPassword());
+        request.setUserName(employee.getPassword());
+        request.setPosition(employee.getPosition());
+        model.addAttribute("addEmployeeRequest", request);
+        List<Branch> branches = branchService.findAll();
+        model.addAttribute("branches", branches);
+        employeeService.deleteEmployeeById(id);
         return "admin/addEmployee";
+    }
+
+    @GetMapping("/branches/update")
+    public String updateBranch(@RequestParam("branchId") long id, Model model){
+        Branch branch = branchService.getBranchById(id);
+        AddBranchRequest request = new AddBranchRequest();
+        request.setCity(branch.getAddress().getCity());
+        request.setPostalCode(branch.getAddress().getPostalCode());
+        request.setStreet(branch.getAddress().getStreet());
+        request.setStreetNumber(branch.getAddress().getStreetNumber());
+        model.addAttribute("addBranchRequest", request);
+        branchService.deleteBranchById(id);
+        return "admin/addBranch";
     }
 
 

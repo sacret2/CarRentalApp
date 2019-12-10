@@ -12,4 +12,5 @@ public interface EmployeeService {
     List<Employee> findAll();
     void deleteEmployeeById(long employeeId);
     long addEmployee(AddEmployeeRequest request);
+    Employee getEmployeeById(long id);
 }

@@ -16,7 +16,7 @@
         <input id = "password" type="text" th:field="*{password}" placeholder="Password" class="form-control mb-4 col-4" />
         <input id = "position" type="text" th:field="*{position}" placeholder="Position" class="form-control mb-4 col-4" />
         <label>Select Branch</label>
-        <select th:field="*{branchId}" class="form-control" id="exampleFormControlSelect1" style="max-width:30%;" >
+        <select th:field="*{branchId}" class="form-control" id="exampleFormControlSelect1" style="max-width:33%;" >
             <div th:each="branch : ${branches}">
                 <option th:value="${branch.id}" th:text="${branch.address.city} +' '+ ${branch.address.street} +' '+ ${branch.address.streetNumber}"/>
             </div>

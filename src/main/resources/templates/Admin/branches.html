@@ -5,6 +5,29 @@
 </head>
 <body>
 <nav th:replace="template :: navbar"></nav>
+
+<br>
+<div align="center">
+    <a th:href="@{/admin/branches/addBranch}" class="btn btn-primary btn-sm mb-3">Add Branch</a>
+    <table border ="1">
+        <thead>
+        <tr>
+            <th>Branch Address</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempBranch : ${branches}">
+            <td th:text="${tempBranch.address.postalCode} + ' ' + ${tempBranch.address.city} + ' ' + ${tempBranch.address.street} + ' ' + ${tempBranch.address.streetNumber}"/>
+            <td>
+                <a th:href="@{/admin/branches/update(branchId=${tempBranch.id})}" class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/admin/branches/delete(branchId=${tempBranch.id})}" class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you want to delete this branch?\nBe aware that this operation removes all associated employees and cars of this branch'))) return false">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

@@ -5,6 +5,20 @@
 </head>
 <body>
 <nav th:replace="template :: navbar"></nav>
+<div align="center">
+    <br>
+    <h2>Add Branch</h2>
+    <hr>
+    <br>
+    <form action="#" th:action="@{/admin/branches/saveBranch}" th:object="${addBranchRequest}" method="POST">
+        <input id = "postalCode" type="text" th:field="*{postalCode}" placeholder="Postal Code" class="form-control mb-4 col-4"/>
+        <input id = "city" type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4" />
+        <input id = "street" type="text" th:field="*{street}" placeholder="Street" class="form-control mb-4 col-4" />
+        <input id = "streetNumber" type="text" th:field="*{streetNumber}" placeholder="Street Number" class="form-control mb-4 col-4" />
+        <br>
+        <button type="submit" class="btn btn-primary btn-sm">Add Branch</button>
+    </form>
+</div>
 <footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

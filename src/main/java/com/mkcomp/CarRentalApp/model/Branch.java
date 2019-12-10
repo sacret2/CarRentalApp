@@ -2,6 +2,7 @@ package com.mkcomp.CarRentalApp.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Branch {
@@ -13,6 +14,20 @@ public class Branch {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
+
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL )
+    List<Employee> employees;
+
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL)
+    List<Car> cars;
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
 
     public long getId() {
         return id;

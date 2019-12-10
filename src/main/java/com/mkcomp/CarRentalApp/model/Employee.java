@@ -16,7 +16,7 @@ public class Employee extends User {
     private String position;
     private boolean isAdmin;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "branch_id")
     private Branch branch;
 

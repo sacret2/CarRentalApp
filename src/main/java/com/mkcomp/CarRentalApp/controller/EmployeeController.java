@@ -86,12 +86,6 @@ public class EmployeeController {
         return "employee/addCar";
     }
 
-    @GetMapping("/cars/update")
-    public String updateCar(@RequestParam("carId") long id, Model model){
-        Car car = carService.findCarById(id);
-        model.addAttribute("car",car);
-        return "employee/addCar";
-    }
 
     @PostMapping("/saveCar")
     public String saveCar(@ModelAttribute("addCarRequest") AddCarRequest request){

@@ -6,20 +6,19 @@
 <body>
 <nav th:replace="template :: navbar"></nav>
 <div align="center">
+    <br>
     <h2>Add car</h2>
     <hr>
     <br>
     <form action="#" th:action="@{/employee/saveCar}" th:object="${addCarRequest}" method="POST">
-        <label for="Brand">Brand</label>
         <input id = "Brand" type="text" th:field="*{brand}" placeholder="Brand" class="form-control mb-4 col-4"/>
-        <label for="carModel">Model</label>
         <input id = "carModel" type="text" th:field="*{model}" placeholder="Model" class="form-control mb-4 col-4" />
         <label for="productionYear">Production year</label>
         <input id = "productionYear" type="text" th:field="*{productionYear}" placeholder="Production year" class="form-control mb-4 col-4" />
         <label for="pricePerDay">Base price per day</label>
         <input id = "pricePerDay" type="text" th:field="*{basePricePerDay}" placeholder="Base price per day" class="form-control mb-4 col-4" />
         <label>Select branch</label>
-        <select th:field="*{branchId}" class="form-control" id="exampleFormControlSelect1" >
+        <select th:field="*{branchId}" class="form-control" id="exampleFormControlSelect1" style="max-width:33%;" >
             <div th:each="branch : ${branches}">
                 <option th:value="${branch.id}" th:text="${branch.address.city} +' '+ ${branch.address.street} +' '+ ${branch.address.streetNumber}"/>
             </div>
@@ -27,8 +26,9 @@
         <br>
         <label for="Specification">Specification</label>
         <textarea class="form-control" id="Specification" rows="7"
-                  th:field="*{specification}">
+                  th:field="*{specification}" style="max-width:33%;">
         </textarea>
+        <br>
         <button type="submit" class="btn btn-primary btn-sm">Add Car</button>
     </form>
 </div>
