@@ -66,20 +66,30 @@ public class EmployeeController {
     @GetMapping("/cars/delete")
     public String deleteCar(@RequestParam("carId") long id){
         carService.deleteCarById(id);
-        return "employee/cars";
+        return "employee/panel";
     }
 
     @GetMapping("/cars/update")
     public String updateCar(@RequestParam("carId") long id, Model model){
         Car car = carService.findCarById(id);
-        model.addAttribute("car",car);
+        AddCarRequest addCarRequest = new AddCarRequest();
+        addCarRequest.setBasePricePerDay(car.getBasePricePerDay());
+        addCarRequest.setBrand(car.getBrand());
+        addCarRequest.setModel(car.getModel());
+        addCarRequest.setProductionYear(car.getProductionYear());
+        addCarRequest.setSpecification(car.getSpecification());
+        addCarRequest.setBranchId(car.getBranch().getId());
+        carService.deleteCarById(car.getId());
+        List<Branch> branches = branchService.findAll();
+        model.addAttribute("branches", branches);
+        model.addAttribute("addCarRequest", addCarRequest);
         return "employee/addCar";
     }
 
     @PostMapping("/saveCar")
     public String saveCar(@ModelAttribute("addCarRequest") AddCarRequest request){
         carService.addCar(request);
-        return "employee/cars";
+        return "employee/panel";
     }
 
     @RequestMapping("/")

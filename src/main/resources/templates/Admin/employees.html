@@ -5,6 +5,36 @@
 </head>
 <body>
 <nav th:replace="template :: navbar"></nav>
+
+<br>
+<div align="center">
+    <a th:href="@{/admin/employees/addEmployee}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
+    <table border ="1">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Position</th>
+            <th>Branch</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempEmployee : ${employees}">
+            <td th:text="${tempEmployee.firstName}"/>
+            <td th:text="${tempEmployee.lastName}"/>
+            <td th:text="${tempEmployee.position}"/>
+            <td th:text="${tempEmployee.branch.address.city} + ' ' + ${tempEmployee.branch.address.street} + ' ' + ${tempEmployee.branch.address.streetNumber}"/>
+            <td>
+                <a th:href="@{/admin/employees/update(employeeId=${tempEmployee.id})}" class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/admin/employees/delete(employeeId=${tempEmployee.id})}" class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you want to delete this employee?'))) return false">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 <footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

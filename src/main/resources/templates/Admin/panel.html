@@ -6,10 +6,8 @@
 <nav th:replace="template :: navbar"></nav>
 <br>
 
-<button type="button" class="btn btn-primary btn-lg btn-block">Add employee</button>
-<button type="button" class="btn btn-secondary btn-lg btn-block">Add branch</button>
-<button type="button" class="btn btn-primary btn-lg btn-block">View employees</button>
-<button type="button" class="btn btn-secondary btn-lg btn-block">View branches</button>
+<a th:href="@{/admin/employees}" class="btn btn-primary btn-lg">Employees</a>
+<a th:href="@{/admin/branches}" class="btn btn-info btn-lg">Branches</a>
 
 <footer th:replace="template :: app_footer"></footer>
 </body>
