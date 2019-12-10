@@ -18,6 +18,12 @@ public class AdminController {
         this.branchService = branchService;
     }
 
+    @RequestMapping("/employees")
+    public String viewEmployees(Model model){
+
+        return "admin/employees";
+    }
+
     @RequestMapping("addEmployee")
     public String addEmployee(Model model){
         AddEmployeeRequest request = new AddEmployeeRequest();

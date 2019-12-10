@@ -10,4 +10,5 @@ public interface CarService {
     Long addCar(AddCarRequest request);
     List<Car> findAll();
     void deleteCarById(long id);
+    Car findCarById(Long id);
 }

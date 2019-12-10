@@ -21,7 +21,7 @@ public class Car {
 
     private double basePricePerDay;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "branch_id")
     private Branch branch;
 

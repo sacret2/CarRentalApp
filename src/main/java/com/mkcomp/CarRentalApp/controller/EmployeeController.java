@@ -47,7 +47,7 @@ public class EmployeeController {
         return "employee/createRental";
     }
 
-    @RequestMapping("/addCar")
+    @RequestMapping("/cars/addCar")
     public String addCarForm(Model model){
         AddCarRequest addCarRequest = new AddCarRequest();
         List<Branch> branches = branchService.findAll();
@@ -63,16 +63,23 @@ public class EmployeeController {
         return "employee/cars";
     }
 
-    @DeleteMapping("cars/delete")
+    @GetMapping("/cars/delete")
     public String deleteCar(@RequestParam("carId") long id){
         carService.deleteCarById(id);
         return "employee/cars";
     }
 
+    @GetMapping("/cars/update")
+    public String updateCar(@RequestParam("carId") long id, Model model){
+        Car car = carService.findCarById(id);
+        model.addAttribute("car",car);
+        return "employee/addCar";
+    }
+
     @PostMapping("/saveCar")
     public String saveCar(@ModelAttribute("addCarRequest") AddCarRequest request){
         carService.addCar(request);
-        return "employee/panel";
+        return "employee/cars";
     }
 
     @RequestMapping("/")

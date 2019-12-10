@@ -4,10 +4,12 @@ import com.mkcomp.CarRentalApp.api.request.AddReservationRequest;
 import com.mkcomp.CarRentalApp.model.Reservation;
 import com.mkcomp.CarRentalApp.repository.ReservationRepository;
 import com.mkcomp.CarRentalApp.service.ReservationService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class ReservationServiceImpl implements ReservationService {
 
     private ReservationRepository reservationRepository;
