@@ -50,7 +50,7 @@ public class CarServiceImpl implements CarService {
         Car car = new Car();
         car.setBasePricePerDay(request.getBasePricePerDay());
         car.setBrand(request.getBrand());
-        car.setLocation(branch);
+        car.setBranch(branch);
         car.setModel(request.getModel());
         car.setProductionYear(request.getProductionYear());
         car.setSpecification(request.getSpecification());
