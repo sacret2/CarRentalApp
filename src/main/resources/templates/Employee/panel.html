@@ -5,12 +5,11 @@
 <body>
 <nav th:replace="template :: navbar"></nav>
 <br>
-<button type="button" class="btn btn-primary btn-lg btn-block">Create rental</button>
-<button type="button" class="btn btn-secondary btn-lg btn-block">View rentals</button>
-<button type="button" class="btn btn-primary btn-lg btn-block">Create invoice</button>
-<button type="button" class="btn btn-secondary btn-lg btn-block">View invoices</button>
-<button type="button" class="btn btn-primary btn-lg btn-block">Add car</button>
-<button type="button" class="btn btn-secondary btn-lg btn-block">View cars</button>
+
+<a th:href="@{/employee/cars}" class="btn btn-primary btn-lg">Cars</a>
+<a th:href="@{/employee/reservations}" class="btn btn-info btn-lg">Reservations</a>
+<a th:href="@{/employee/rentals}" class="btn btn-primary btn-lg">Rentals</a>
+<a th:href="@{/employee/invoices}" class="btn btn-info btn-lg">Invoices</a>
 
 <footer th:replace="template :: app_footer"></footer>
 </body>
