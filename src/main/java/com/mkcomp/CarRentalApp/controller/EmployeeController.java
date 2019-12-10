@@ -1,24 +1,50 @@
 package com.mkcomp.CarRentalApp.controller;
 
 import com.mkcomp.CarRentalApp.api.request.AddCarRequest;
+import com.mkcomp.CarRentalApp.api.request.AddDamageRequest;
+import com.mkcomp.CarRentalApp.api.request.AddRentalRequest;
 import com.mkcomp.CarRentalApp.model.Branch;
 import com.mkcomp.CarRentalApp.model.Car;
+import com.mkcomp.CarRentalApp.model.Reservation;
+import com.mkcomp.CarRentalApp.service.ReservationService;
 import com.mkcomp.CarRentalApp.service.impl.BranchServiceImpl;
 import com.mkcomp.CarRentalApp.service.impl.CarServiceImpl;
+import com.mkcomp.CarRentalApp.service.impl.ReservationServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller("/employee")
+@Controller
+@RequestMapping("/employee")
 public class EmployeeController {
     private BranchServiceImpl branchService;
     private CarServiceImpl carService;
+    private ReservationServiceImpl reservationService;
 
-    public EmployeeController(BranchServiceImpl branchServiceImpl, CarServiceImpl carService) {
+    public EmployeeController(BranchServiceImpl branchService, CarServiceImpl carService) {
         this.branchService = branchService;
         this.carService = carService;
+    }
+
+    @RequestMapping("/reservations")
+    public String showReservations(Model model){
+        List<Reservation> reservations = reservationService.findAll();
+        model.addAttribute("reservations", reservations);
+        return "employee/reservations";
+    }
+
+    @PostMapping("/reservations/createRental")
+    public String showFormForRental(@RequestParam("reservationId") long id, Model model){
+        Reservation reservation = reservationService.findById(id);
+        AddDamageRequest addDamageRequest = new AddDamageRequest();
+        model.addAttribute("addDamageRequest", addDamageRequest);
+        AddRentalRequest addRentalRequest = new AddRentalRequest();
+        addRentalRequest.setDamageRequest(addDamageRequest);
+        addRentalRequest.setReservation(reservation);
+        model.addAttribute("addRentalRequest", addRentalRequest);
+        return "employee/createRental";
     }
 
     @RequestMapping("/addCar")
@@ -46,6 +72,11 @@ public class EmployeeController {
     @PostMapping("/saveCar")
     public String saveCar(@ModelAttribute("addCarRequest") AddCarRequest request){
         carService.addCar(request);
+        return "employee/panel";
+    }
+
+    @RequestMapping("/")
+    public String viewPanel() {
         return "employee/panel";
     }
 

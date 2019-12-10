@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="template :: index_head">
-
 </head>
 <body>
 <nav th:replace="template :: navbar"></nav>
+<br>
+<button type="button" class="btn btn-primary btn-lg btn-block">Add employee</button>
+<button type="button" class="btn btn-secondary btn-lg btn-block">Add branch</button>
+<button type="button" class="btn btn-primary btn-lg btn-block">View employees</button>
+<button type="button" class="btn btn-secondary btn-lg btn-block">View branches</button>
+
 <footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

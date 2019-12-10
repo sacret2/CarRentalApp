@@ -23,7 +23,7 @@ public class Car {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "branch_id")
-    private Branch location;
+    private Branch branch;
 
     public long getId() {
         return id;
@@ -73,11 +73,11 @@ public class Car {
         this.basePricePerDay = basePricePerDay;
     }
 
-    public Branch getLocation() {
-        return location;
+    public Branch getBranch() {
+        return branch;
     }
 
-    public void setLocation(Branch location) {
-        this.location = location;
+    public void setBranch(Branch location) {
+        this.branch = location;
     }
 }
