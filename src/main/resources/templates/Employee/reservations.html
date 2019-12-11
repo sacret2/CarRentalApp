@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="employee/template :: index_head">
-
+</head>
+<head>
+    <link th:href="@{../css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{../css/styles.css}" rel="stylesheet" />
 </head>
 <body>
 <nav th:replace="employee/template :: navbar"></nav>
 <div align="center">
     <br>
-    <h2>Rentals</h2>
+    <h2>Reservations</h2>
     <br>
     <table border ="1">
         <thead style="text-align: center">
         <tr>
-            <th>ID</th>
+            <th>Reservation ID</th>
             <th>Car ID</th>
             <th>User</th>
             <th>Cost</th>
@@ -23,9 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="table table-striped" th:each="reservation, iterStat : ${reservations}">
-            <form action="#" th:action="@{/employee/reservations/createRental}"
-                  th:object="${addRentalRequests[__${iterStat.index}__]} " method="POST">
+        <tr class="table table-striped" th:each="reservation : ${reservations}">
                 <td th:text="${reservation.id}"/>
                 <td th:text="${reservation.car.id}"/>
                 <td th:text="${reservation.customer.userName}"/>
@@ -34,9 +35,8 @@
                 <td th:text="${reservation.reservationStart}"/>
                 <td th:text="${reservation.reservationEnd}"/>
                 <td>
-                    <button th:type="submit" class="btn btn-primary btn-sm mb-3">Create rental</button>
+                    <a th:href="@{/employee/createRental(reservationId=${reservation.id})}" class="btn btn-success btn-sm">Make Reservation</a>
                 </td>
-            </form>
         </tr>
         </tbody>
     </table>

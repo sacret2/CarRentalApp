@@ -3,8 +3,48 @@
 <head th:include="employee/template :: index_head">
 
 </head>
+<head>
+    <link th:href="@{css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
+</head>
 <body>
 <nav th:replace="employee/template :: navbar"></nav>
+<div align="center">
+    <br>
+    <h2>Rentals</h2>
+    <br>
+    <table border ="1">
+        <thead style="text-align: center">
+        <tr>
+            <th>Rental ID</th>
+            <th>Reservation ID</th>
+            <th>Return date</th>
+            <th>wasOverdue</th>
+            <th>Overdue penalty</th>
+            <th>Damage penalty</th>
+            <th>Show invoice</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table table-striped" th:object="${rental}">
+            <td th:text="${rental.id}"/>
+            <td th:text="${rental.reservation.id}"/>
+            <td>
+                <input type="date" th:value="${rental.returnDate}" th:text="${rental.returnDate}">
+            </td>
+            <td>
+                <input type="checkbox" th:value="${rental.wasOverdue}" >
+            </td> th:text="${rental.wasOverdue}"/>
+            <td>
+                <input type="number" th:value="${rental.overduePenalty}" >
+            </td>
+            <td>
+                <input type="number" th:value="${rental.damage.damagePenalty}" >
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <footer th:replace="employee/template :: app_footer"></footer>
 </body>
 </html>
