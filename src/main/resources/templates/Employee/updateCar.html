@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="employee/template :: index_head"/>
+<head>
+    <link th:href="@{../css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{../css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+<nav th:replace="employee/template :: navbar"></nav>
+<div align="center">
+    <br>
+    <h2>Add car</h2>
+    <hr>
+    <br>
+    <form action="#" th:action="@{/employee/updateCar}" th:object="${addCarRequest}" method="POST">
+        <input id = "Brand" type="text" th:field="*{brand}" placeholder="Brand" class="form-control mb-4 col-4"/>
+        <input id = "carModel" type="text" th:field="*{model}" placeholder="Model" class="form-control mb-4 col-4" />
+        <label for="productionYear">Production year</label>
+        <input id = "productionYear" type="text" th:field="*{productionYear}" placeholder="Production year" class="form-control mb-4 col-4" />
+        <label for="pricePerDay">Base price per day</label>
+        <input id = "pricePerDay" type="text" th:field="*{basePricePerDay}" placeholder="Base price per day" class="form-control mb-4 col-4" />
+        <label>Select branch</label>
+        <select th:field="*{branchId}" class="form-control" id="exampleFormControlSelect1" style="max-width:33%;" >
+            <div th:each="branch : ${branches}">
+                <option th:value="${branch.id}" th:text="${branch.address.city} +' '+ ${branch.address.street} +' '+ ${branch.address.streetNumber}"/>
+            </div>
+        </select>
+        <br>
+        <label for="Specification">Specification</label>
+        <textarea class="form-control" id="Specification" rows="7"
+                  th:field="*{specification}" style="max-width:33%;">
+        </textarea>
+        <br>
+        <button type="submit" class="btn btn-primary btn-sm">Add Car</button>
+    </form>
+</div>
+
+
+<footer th:replace="employee/template :: app_footer"></footer>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>

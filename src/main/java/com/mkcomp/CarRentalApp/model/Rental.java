@@ -69,4 +69,16 @@ public class Rental {
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
     }
+
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "id=" + id +
+                ", wasOverdue=" + wasOverdue +
+                ", overduePenalty=" + overduePenalty +
+                ", returnDate=" + returnDate +
+                ", damage=" + damage +
+                ", reservation=" + reservation +
+                '}';
+    }
 }

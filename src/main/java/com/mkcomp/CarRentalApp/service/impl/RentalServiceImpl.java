@@ -8,6 +8,8 @@ import com.mkcomp.CarRentalApp.repository.RentalRepository;
 import com.mkcomp.CarRentalApp.service.RentalService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -25,12 +27,14 @@ public class RentalServiceImpl implements RentalService {
         Rental rental = new Rental();
         rental.setOverduePenalty(request.getOverduePenalty());
         rental.setReservation(request.getReservation());
-        rental.setReturnDate(request.getReturnDate());
+        LocalDateTime returnDate = request.getReturnDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        rental.setReturnDate(returnDate);
         rental.setWasOverdue(request.isWasOverdue());
         Damage damage = new Damage();
         damageRepository.save(new Damage());
         rental.setDamage(damage);
         rentalRepository.save(rental);
+        System.out.println(rental);
         return rental.getId();
     }
 

@@ -91,4 +91,24 @@ public class CarServiceImpl implements CarService {
         }
         return availableCars;
     }
+
+    public void updateCar(Car car){
+
+    }
+
+    @Override
+    public void updateCar(AddCarRequest request, long id) {
+        Branch branch = branchRepository.getOne(request.getBranchId());
+        Car car = new Car();
+        car.setBasePricePerDay(request.getBasePricePerDay());
+        car.setBrand(request.getBrand());
+        car.setBranch(branch);
+        car.setModel(request.getModel());
+        car.setProductionYear(request.getProductionYear());
+        car.setSpecification(request.getSpecification());
+        car.setId(id);
+        Car previousCopy = carRepository.getOne(id);
+        previousCopy = car;
+        carRepository.save(previousCopy);
+    }
 }

@@ -5,13 +5,14 @@ import com.mkcomp.CarRentalApp.model.Damage;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class AddRentalRequest {
 
     private boolean wasOverdue;
     private double overduePenalty;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime returnDate;
+    private Date returnDate;
     private Reservation reservation;
 
     public Reservation getReservation() {
@@ -38,11 +39,11 @@ public class AddRentalRequest {
         this.overduePenalty = overduePenalty;
     }
 
-    public LocalDateTime getReturnDate() {
+    public Date getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(LocalDateTime returnDate) {
+    public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
     }
 }

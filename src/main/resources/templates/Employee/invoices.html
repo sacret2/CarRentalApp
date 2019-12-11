@@ -7,33 +7,38 @@
 </head>
 <body>
 <nav th:replace="employee/template :: navbar"></nav>
-<div align="center">
-    <br>
-    <h2>Rentals</h2>
-    <br>
-    <table border ="1">
-        <thead style="text-align: center">
-        private long id;
-        private LocalDateTime issueDate;
+<br>
+<h3>List Of Invoices</h3>
 
-        @OneToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "rental_id")
-        private Rental rental;
+<br>
+<div align="center">
+    <table border ="1">
+        <thead>
         <tr>
-            <th>ID</th>
+            <th>Invoice Id</th>
             <th>Issue date</th>
-            <th>Rental ID</th>
+            <th>Overdue Penalty</th>
+            <th>Rental Cost</th>
+            <th>Date from</th>
+            <th>Date to</th>
+            <th>Customer</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="table table-striped" th:each="invoice, iterStat : ${invoices}">
+        <tr th:each="invoice : ${invoices}">
             <td th:text="${invoice.id}"/>
             <td th:text="${invoice.issueDate}"/>
-            <td th:text="${invoice.rental.Id}"/>
+            <td th:text="${invoice.rental.overduePenalty}"/>
+            <td th:text="${invoice.rental.reservation.cost}"/>
+            <td th:text="${invoice.rental.reservation.reservationStart}"/>
+            <td th:text="${invoice.rental.returnDate}"/>
+            <td th:text="${invoice.rental.reservation.customer}"/>
         </tr>
         </tbody>
     </table>
 </div>
+<br>
+<a th:href="@{/employee/panel}" class="btn btn-secondary btn-sm mb-3">Return</a>
 
 <footer th:replace="employee/template :: app_footer"></footer>
 </body>

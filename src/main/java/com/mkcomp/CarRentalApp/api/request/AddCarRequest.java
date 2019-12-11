@@ -4,6 +4,7 @@ import com.mkcomp.CarRentalApp.model.Branch;
 
 
 public class AddCarRequest {
+    private long carId;
     private String brand;
     private String model;
     private int productionYear;
@@ -12,6 +13,14 @@ public class AddCarRequest {
     private long branchId;
 
     public AddCarRequest() {
+    }
+
+    public long getCarId() {
+        return carId;
+    }
+
+    public void setCarId(long carId) {
+        this.carId = carId;
     }
 
     public AddCarRequest(String brand, String model, int productionYear, String specification, double basePricePerDay, long branchId) {

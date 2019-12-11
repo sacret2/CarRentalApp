@@ -28,6 +28,7 @@ public class EmployeeController {
     private RentalService rentalService;
     private DamageService damageService;
     private static Employee employee;
+    private long carId;
 
     public EmployeeController(BranchServiceImpl branchService, CarServiceImpl carService, ReservationServiceImpl reservationService, InvoiceService invoiceService, RentalService rentalService, DamageService damageService) {
         this.branchService = branchService;
@@ -53,11 +54,12 @@ public class EmployeeController {
     }
 
     @RequestMapping("/createRental")
-    public String showFormForRental(@RequestParam("reservationId") long reservationId){
+    public String showFormForRental(@RequestParam("reservationId") long reservationId,
+                                    Model model){
         AddRentalRequest addRentalRequest = new AddRentalRequest();
         addRentalRequest.setReservation(reservationService.findById(reservationId));
-        rentalService.addRental(addRentalRequest);
-        return "employee/panel";
+        model.addAttribute("addRentalRequest", addRentalRequest);
+        return "employee/createRental";
     }
 
     @RequestMapping("/rental")
@@ -65,6 +67,12 @@ public class EmployeeController {
         Rental rental = rentalService.getRental(rentalId);
         model.addAttribute("rental", rental);
         return "employee/rental?rentalId";
+    }
+
+    @PostMapping("rentals/add")
+    public String addNewRental(@ModelAttribute("addRentalRequest") AddRentalRequest request){
+        rentalService.addRental(request);
+        return "employee/panel";
     }
 
     @RequestMapping("/cars/addCar")
@@ -75,6 +83,8 @@ public class EmployeeController {
         model.addAttribute("branches", branches);
         return "employee/addCar";
     }
+
+
 
     @RequestMapping("/cars")
     public String showCars(Model model){
@@ -99,16 +109,23 @@ public class EmployeeController {
         addCarRequest.setProductionYear(car.getProductionYear());
         addCarRequest.setSpecification(car.getSpecification());
         addCarRequest.setBranchId(car.getBranch().getId());
-        carService.deleteCarById(car.getId());
+        addCarRequest.setCarId(car.getId());
         List<Branch> branches = branchService.findAll();
+        carId = car.getId();
         model.addAttribute("branches", branches);
         model.addAttribute("addCarRequest", addCarRequest);
-        return "employee/addCar";
+        return "employee/updateCar";
     }
 
     @PostMapping("/saveCar")
     public String saveCar(@ModelAttribute("addCarRequest") AddCarRequest request){
         carService.addCar(request);
+        return "employee/panel";
+    }
+
+    @PostMapping("/updateCar")
+    public String updateCar(@ModelAttribute("addCarRequest") AddCarRequest request){
+        carService.updateCar(request, carId);
         return "employee/panel";
     }
 
@@ -124,7 +141,7 @@ public class EmployeeController {
     @RequestMapping("/invoices")
     public String showInvoices(Model model){
         List<Invoice> invoices = invoiceService.findAll();
-        model.addAttribute("cars", invoices);
+        model.addAttribute("invoices", invoices);
         return "employee/invoices";
     }
 
@@ -132,11 +149,11 @@ public class EmployeeController {
     public String showRentals(Model model){
         List<Rental> rentals = rentalService.getAllRentals();
         model.addAttribute("rentals", rentals);
-        List<Damage> damages = new LinkedList<>();
-        for(Rental rental : rentals){
-            damages.add(rental.getDamage());
-        }
-        model.addAttribute("damages", damages);
+//        List<Damage> damages = new LinkedList<>();
+//        for(Rental rental : rentals){
+//            damages.add(rental.getDamage());
+//        }
+//        model.addAttribute("damages", damages);
         return "employee/rentals";
     }
 
@@ -146,8 +163,10 @@ public class EmployeeController {
         return "employee/panel";
     }
 
-
-
+    @RequestMapping("/panel")
+    public String showPanel(){
+        return "employee/panel";
+    }
 
     public static void setEmployee(Employee employee) {
         EmployeeController.employee = employee;

@@ -14,4 +14,5 @@ public interface CarService {
     void deleteCarById(long id);
     Car findCarById(Long id);
     List<Car> findAvailableCars(LocalDateTime startDate, LocalDateTime endDate, long branchId);
+    void updateCar(AddCarRequest request, long id);
 }
