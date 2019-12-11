@@ -11,8 +11,7 @@ public interface ReservationService {
 
     Long addReservation(AddReservationRequest request);
     Set<Reservation> getAllReservations(long customerId);
-    boolean deleteReservation(long reservationId);
-    boolean makeAnAdvancePayment(long reservationId);
+    void deleteReservation(long reservationId);
     List<Reservation> findAll();
     Reservation findById(Long id);
     Long addReservation(Reservation reservation);

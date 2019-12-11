@@ -13,10 +13,7 @@ import com.mkcomp.CarRentalApp.model.Invoice;
 
 import com.mkcomp.CarRentalApp.repository.CarRepository;
 import com.mkcomp.CarRentalApp.service.CustomerService;
-import com.mkcomp.CarRentalApp.service.impl.BranchServiceImpl;
-import com.mkcomp.CarRentalApp.service.impl.CarServiceImpl;
-import com.mkcomp.CarRentalApp.service.impl.CustomerServiceImpl;
-import com.mkcomp.CarRentalApp.service.impl.ReservationServiceImpl;
+import com.mkcomp.CarRentalApp.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -46,6 +43,7 @@ public class CustomerController {
     private BranchServiceImpl branchService;
     private CarServiceImpl carService;
     private ReservationServiceImpl reservationService;
+    private InvoiceServiceImpl invoiceService;
     private Reservation reservation;
 
     private static Customer customer;
@@ -61,11 +59,13 @@ public class CustomerController {
     public CustomerController(CustomerServiceImpl customerService,
                               BranchServiceImpl branchService,
                               CarServiceImpl carService,
-                              ReservationServiceImpl reservationService) {
+                              ReservationServiceImpl reservationService,
+                              InvoiceServiceImpl invoiceService) {
         this.customerService = customerService;
         this.branchService = branchService;
         this.carService = carService;
         this.reservationService = reservationService;
+        this.invoiceService = invoiceService;
     }
 
     @PostMapping("/register")
@@ -73,6 +73,7 @@ public class CustomerController {
         long customerId = customerService.addCustomer(request);
         if (customerId != -1) {
             Customer customer = customerService.findCustomerById(customerId);
+            CustomerController.setCustomer(customer);
             model.addAttribute("customer", customer);
             return "/customer/panel";
         }
@@ -150,6 +151,19 @@ public class CustomerController {
         List<Reservation> reservations = reservationService.findReservationsByCustomer(customer);
         model.addAttribute("reservations", reservations);
         return "customer/reservations";
+    }
+
+    @RequestMapping("/reservations/delete")
+    public String deleteReservation(@RequestParam("reservationId") long id){
+        reservationService.deleteReservation(id);
+        return "customer/panel";
+    }
+
+    @RequestMapping("/invoices")
+    public String viewInvoices(Model model){
+        List<Invoice> invoices = invoiceService.findAllByCustomer(customer);
+        model.addAttribute("invoices", invoices);
+        return "customer/invoices";
     }
 
 }

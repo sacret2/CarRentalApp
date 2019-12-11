@@ -100,7 +100,7 @@ public class EmployeeController {
     @PostMapping("/saveCar")
     public String saveCar(@ModelAttribute("addCarRequest") AddCarRequest request){
         carService.addCar(request);
-        return "employee/cars";
+        return "employee/panel";
     }
 
     @RequestMapping("/")
@@ -130,6 +130,15 @@ public class EmployeeController {
         model.addAttribute("damages", damages);
         return "employee/rentals";
     }
+
+    @RequestMapping("/generateInvoice")
+    public String generateInvoice(@RequestParam("rentalId") long id){
+        invoiceService.addInvoiceForRental(id);
+        return "employee/panel";
+    }
+
+
+
 
     public static void setEmployee(Employee employee) {
         EmployeeController.employee = employee;

@@ -31,6 +31,8 @@ public class HomeController {
     public String viewHomePage(Model model) {
         model.addAttribute("theDate", new java.util.Date());
         model.addAttribute("cars",carService.findAll());
+        CustomerController.setCustomer(null);
+        EmployeeController.setEmployee(null);
         return "index";
     }
 

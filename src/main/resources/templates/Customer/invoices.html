@@ -5,6 +5,39 @@
 </head>
 <body>
 <nav th:replace="customer/template :: navbar"></nav>
+<br>
+<h3>List Of Invoices</h3>
+
+<br>
+<div align="center">
+    <table border ="1">
+        <thead>
+        <tr>
+            <th>Invoice Id</th>
+            <th>Issue date</th>
+            <th>Overdue Penalty</th>
+            <th>Rental Cost</th>
+            <th>Date from</th>
+            <th>Date to</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="invoice : ${invoices}">
+            <td th:text="${invoice.id}"/>
+            <td th:text="${invoice.issueDate}"/>
+            <td th:text="${invoice.rental.overduePenalty}"/>
+            <td th:text="${invoice.rental.reservation.cost}"/>
+            <td th:text="${invoice.rental.reservation.reservationStart}"/>
+            <td th:text="${invoice.rental.returnDate}"/>
+            <td>
+                <a th:href="@{/customer/panel}" class="btn btn-success btn-sm">Pay For Invoice</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 <footer th:replace="customer/template :: app_footer"></footer>
 </body>
 </html>

@@ -23,6 +23,10 @@ public class Reservation {
     private Customer customer;
     private double cost;
 
+    @OneToOne(mappedBy ="reservation", cascade = CascadeType.ALL)
+    @JoinColumn(name = "rental_id")
+    private Rental rental;
+
     public long getId() {
         return id;
     }

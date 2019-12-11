@@ -30,13 +30,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public boolean deleteReservation(long reservationId) {
-        return false;
-    }
-
-    @Override
-    public boolean makeAnAdvancePayment(long reservationId) {
-        return false;
+    public void deleteReservation(long reservationId) {
+        reservationRepository.deleteById(reservationId);
     }
 
     @Override
