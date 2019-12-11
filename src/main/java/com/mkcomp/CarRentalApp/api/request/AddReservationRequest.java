@@ -2,21 +2,22 @@ package com.mkcomp.CarRentalApp.api.request;
 
 import com.mkcomp.CarRentalApp.model.Car;
 import com.mkcomp.CarRentalApp.model.Customer;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class AddReservationRequest {
+
     private LocalDateTime reservationDate;
-    private LocalDateTime reservationStart;
-    private LocalDateTime reservationEnd;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date reservationStart;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date reservationEnd;
     private Car car;
     private Customer customer;
-    private double cost;
-
-    public AddReservationRequest() {
-    }
-
+    private long branchId;
     public LocalDateTime getReservationDate() {
         return reservationDate;
     }
@@ -25,19 +26,19 @@ public class AddReservationRequest {
         this.reservationDate = reservationDate;
     }
 
-    public LocalDateTime getReservationStart() {
+    public Date getReservationStart() {
         return reservationStart;
     }
 
-    public void setReservationStart(LocalDateTime reservationStart) {
+    public void setReservationStart(Date reservationStart) {
         this.reservationStart = reservationStart;
     }
 
-    public LocalDateTime getReservationEnd() {
+    public Date getReservationEnd() {
         return reservationEnd;
     }
 
-    public void setReservationEnd(LocalDateTime reservationEnd) {
+    public void setReservationEnd(Date reservationEnd) {
         this.reservationEnd = reservationEnd;
     }
 
@@ -57,11 +58,11 @@ public class AddReservationRequest {
         this.customer = customer;
     }
 
-    public double getCost() {
-        return cost;
+    public long getBranchId() {
+        return branchId;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setBranchId(long branchId) {
+        this.branchId = branchId;
     }
 }

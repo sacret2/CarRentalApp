@@ -3,6 +3,7 @@ package com.mkcomp.CarRentalApp.controller;
 
 import com.mkcomp.CarRentalApp.api.request.AddCustomerRequest;
 import com.mkcomp.CarRentalApp.api.request.AddReservationRequest;
+import com.mkcomp.CarRentalApp.model.Branch;
 import com.mkcomp.CarRentalApp.model.Car;
 import com.mkcomp.CarRentalApp.model.Customer;
 import com.mkcomp.CarRentalApp.model.Invoice;
@@ -19,12 +20,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.InlineView;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +34,8 @@ public class CustomerController {
     private BranchServiceImpl branchService;
     private CarServiceImpl carService;
     private ReservationServiceImpl reservationService;
+    public static Customer customer;
 
-    @Autowired
     public CustomerController(CustomerServiceImpl customerService,
                               BranchServiceImpl branchService,
                               CarServiceImpl carService,
@@ -45,10 +44,6 @@ public class CustomerController {
         this.branchService = branchService;
         this.carService = carService;
         this.reservationService = reservationService;
-    }
-
-    public CustomerController(CustomerServiceImpl customerService) {
-        this.customerService = customerService;
     }
 
     @PostMapping("/register")
@@ -69,13 +64,31 @@ public class CustomerController {
         return "customer/cars";
     }
 
-    @RequestMapping("/createReservation")
-    public String createReservation(@RequestParam("AddReservationRequest") AddReservationRequest addReservationRequest,
-                                    @RequestParam("CarId") long carId){
-        Car car = carService.findCarById(carId);
-        addReservationRequest.setCar(car);
-        reservationService.addReservation(addReservationRequest);
-        return "customer/reservations";
+    @RequestMapping("/findCars")
+    public String findCars(Model model){
+        AddReservationRequest request = new AddReservationRequest();
+        model.addAttribute("addReservationRequest", request);
+        List<Branch> branches = branchService.findAll();
+        model.addAttribute("branches", branches);
+        return "customer/findCars";
+    }
+
+    @GetMapping("/showAvailableCars")
+    public String showFoundCars(@ModelAttribute("addReservationRequest") AddReservationRequest request, Model model){
+
+        request.setReservationDate(LocalDateTime.now());
+        request.setCustomer(customer);
+
+
+
+
+        model.addAttribute("addReservationRequest", request);
+        return "customer/panel";
+    }
+
+    @RequestMapping("/panel")
+    public String viewPanel(){
+        return "customer/panel";
     }
 
 }

@@ -6,21 +6,24 @@
 <body>
 <nav th:replace="template :: navbar"></nav>
 <br>
-<h2>Create new Reservation</h2>
-<form action="#" th:action="@{/customer/createReservation}" th:object="${addReservationRequest}" method="GET" >
-    <input type="text" th:field="*{reservationStart}" placeholder="Start Date" class="form-control mb-4 col-4">
-    <input type="text" th:field="*{reservationEnd}" placeholder="End Date" class="form-control mb-4 col-4">
-    <label>City</label>
+<div align="center">
+<h2>Find Cars</h2>
+<br>
+<form action="#" th:action="@{/customer/showAvailableCars}" th:object="${addReservationRequest}" method="GET" >
+    <input type="date" th:field="*{reservationStart}" placeholder="Start Date" class="form-control mb-4 col-4">
+    <input type="date" th:field="*{reservationEnd}" placeholder="End Date" class="form-control mb-4 col-4">
     <select th:field="*{branchId}" class="form-control" style="max-width:33%;" >
         <div th:each="branch : ${branches}">
             <option th:value="${branch.id}" th:text="${branch.address.city}"/>
         </div>
     </select>
+    <br>
     <button type="submit" class="btn btn-info col-2">Search for available cars</button>
 </form>
+</div>
 
 
-
+</body>
 
 <footer th:replace="template :: app_footer"></footer>
 </body>

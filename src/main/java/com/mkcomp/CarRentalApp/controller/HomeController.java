@@ -55,6 +55,7 @@ public class HomeController {
         }
         Customer customer = customerService.findCustomerByUserNameAndPassword(request);
         if (customer != null) {
+            CustomerController.customer = customer;
             model.addAttribute("user", customer);
             return "customer/panel";
         }

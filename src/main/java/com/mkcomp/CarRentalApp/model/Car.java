@@ -1,6 +1,7 @@
 package com.mkcomp.CarRentalApp.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="car")
@@ -24,6 +25,9 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "branch_id")
     private Branch branch;
+
+    @OneToMany(mappedBy = "car")
+    private List<Reservation> reservations;
 
     public long getId() {
         return id;
