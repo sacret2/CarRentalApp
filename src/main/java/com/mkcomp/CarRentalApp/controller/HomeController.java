@@ -53,11 +53,13 @@ public class HomeController {
         Employee employee = employeeService.findEmployeeByUserNameAndPassword(request);
         if (employee != null) {
             model.addAttribute("user", employee);
+            EmployeeController.setEmployee(employee);
             if (employee.isAdmin()) return "admin/panel";
             return "employee/panel";
         }
         Customer customer = customerService.findCustomerByUserNameAndPassword(request);
         if (customer != null) {
+            CustomerController.setCustomer(customer);
             model.addAttribute("user", customer);
             CustomerController.setCustomer(customer);
             return "customer/panel";

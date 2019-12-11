@@ -94,10 +94,12 @@ public class AddReservationRequest {
 
     public void setBranchId(long branchId) {
         this.branchId = branchId;
+
     }
 
     public double getCost() {
         return cost;
+
     }
 
     public void setCost(double cost) {

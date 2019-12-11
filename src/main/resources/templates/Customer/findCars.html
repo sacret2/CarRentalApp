@@ -9,6 +9,7 @@
 <div align="center">
 <h2>Find Cars</h2>
 <br>
+
 <form action="#" th:action="@{/customer/availableCars}" th:object="${addReservationRequest}" method="GET" >
     <input type="date" th:field="*{reservationStart}" placeholder="Start Date" class="form-control mb-4 col-4">
     <input type="date" th:field="*{reservationEnd}" placeholder="End Date" class="form-control mb-4 col-4">

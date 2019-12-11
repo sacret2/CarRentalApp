@@ -1,7 +1,8 @@
 package com.mkcomp.CarRentalApp.api.request;
 
-import com.mkcomp.CarRentalApp.model.Damage;
 import com.mkcomp.CarRentalApp.model.Reservation;
+import com.mkcomp.CarRentalApp.model.Damage;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -9,9 +10,9 @@ public class AddRentalRequest {
 
     private boolean wasOverdue;
     private double overduePenalty;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime returnDate;
     private Reservation reservation;
-    private AddDamageRequest damageRequest;
 
     public Reservation getReservation() {
         return reservation;
@@ -19,14 +20,6 @@ public class AddRentalRequest {
 
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
-    }
-
-    public AddDamageRequest getDamageRequest() {
-        return damageRequest;
-    }
-
-    public void setDamageRequest(AddDamageRequest damageRequest) {
-        this.damageRequest = damageRequest;
     }
 
     public boolean isWasOverdue() {

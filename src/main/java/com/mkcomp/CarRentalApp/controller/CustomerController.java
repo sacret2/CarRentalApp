@@ -3,7 +3,14 @@ package com.mkcomp.CarRentalApp.controller;
 
 import com.mkcomp.CarRentalApp.api.request.AddCustomerRequest;
 import com.mkcomp.CarRentalApp.api.request.AddReservationRequest;
+
 import com.mkcomp.CarRentalApp.model.*;
+
+import com.mkcomp.CarRentalApp.model.Branch;
+import com.mkcomp.CarRentalApp.model.Car;
+import com.mkcomp.CarRentalApp.model.Customer;
+import com.mkcomp.CarRentalApp.model.Invoice;
+
 import com.mkcomp.CarRentalApp.repository.CarRepository;
 import com.mkcomp.CarRentalApp.service.CustomerService;
 import com.mkcomp.CarRentalApp.service.impl.BranchServiceImpl;
@@ -26,6 +33,7 @@ import java.time.LocalDateTime;
 
 import java.time.ZoneId;
 import java.util.Date;
+
 import java.util.LinkedList;
 
 import java.util.List;
@@ -93,8 +101,9 @@ public class CustomerController {
         return "customer/findCars";
     }
 
+
     @GetMapping("/availableCars")
-    public String showFoundCars(@ModelAttribute("addReservationRequest") AddReservationRequest request, Model model){
+    public String showFoundCars(@ModelAttribute("addReservationRequest") AddReservationRequest request, Model model) {
 
         LocalDateTime start = request.getReservationStart().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         LocalDateTime end = request.getReservationEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
@@ -105,7 +114,7 @@ public class CustomerController {
         reservation.setReservationEnd(end);
         List<Car> availableCars = carService.findAvailableCars(start, end, request.getBranchId());
         String city = branchService.getBranchById(request.getBranchId()).getAddress().getCity();
-        long numOfDays = Duration.between(start,end).toDays();
+        long numOfDays = Duration.between(start, end).toDays();
         model.addAttribute("addReservationRequest", request);
         model.addAttribute("availableCars", availableCars);
         model.addAttribute("city", city);
@@ -113,10 +122,13 @@ public class CustomerController {
         return "customer/availableCars";
     }
 
+
+
     @RequestMapping("/panel")
     public String viewPanel() {
         return "customer/panel";
     }
+
 
     @RequestMapping("/reservations")
     public String viewReservations(Model model){

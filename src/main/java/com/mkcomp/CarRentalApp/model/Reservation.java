@@ -32,7 +32,6 @@ public class Reservation {
     }
 
 
-
     public LocalDateTime getReservationDate() {
         return reservationDate;
     }
@@ -81,6 +80,7 @@ public class Reservation {
         this.cost = cost;
     }
 
+
     @Override
     public String toString() {
         return "Reservation{" +
@@ -93,4 +93,5 @@ public class Reservation {
                 ", cost=" + cost +
                 '}';
     }
+
 }
