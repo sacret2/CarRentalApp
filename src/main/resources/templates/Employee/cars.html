@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="template :: index_head">
+<head th:include="employee/template :: index_head">
 </head>
 <body>
-<nav th:replace="template :: navbar"></nav>
+<nav th:replace="employee/template :: navbar"></nav>
 <br>
 <div align="center">
     <a th:href="@{/employee/cars/addCar}" class="btn btn-primary btn-sm mb-3">Add Car</a>
@@ -37,6 +37,6 @@
 </table>
 </div>
 
-<footer th:replace="template :: app_footer"></footer>
+<footer th:replace="employee/template :: app_footer"></footer>
 </body>
 </html>

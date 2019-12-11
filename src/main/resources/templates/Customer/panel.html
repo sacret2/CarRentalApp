@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="template :: index_head">
+<head th:include="customer/template :: index_head">
 </head>
 <body>
-<nav th:replace="template :: navbar"></nav>
+<nav th:replace="customer/template :: navbar"></nav>
 <br>
 <div align="center">
     <a th:href="@{/customer/findCars}" class="btn btn-primary btn-lg btn-block">Find Cars</a>
     <a th:href="@{/customer/invoices}" class="btn btn-secondary btn-lg btn-block">Invoices</a>
 </div>
 
-<footer th:replace="template :: app_footer"></footer>
+<footer th:replace="customer/template :: app_footer"></footer>
 </body>
 </html>
 </html>

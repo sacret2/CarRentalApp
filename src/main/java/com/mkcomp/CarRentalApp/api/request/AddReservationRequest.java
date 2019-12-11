@@ -5,8 +5,13 @@ import com.mkcomp.CarRentalApp.model.Customer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
+
+import java.time.format.DateTimeFormatter;
 
 public class AddReservationRequest {
 
@@ -18,6 +23,30 @@ public class AddReservationRequest {
     private Car car;
     private Customer customer;
     private long branchId;
+    private double cost;
+
+    public AddReservationRequest() {
+        this.reservationDate = LocalDateTime.now();
+    }
+
+    public AddReservationRequest(Car car, Customer customer) {
+        this();
+        this.car = car;
+        this.customer = customer;
+    }
+
+    private LocalDateTime parse(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try{
+            return (LocalDateTime) formatter.parse(dateString);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public LocalDateTime getReservationDate() {
         return reservationDate;
     }
@@ -62,7 +91,13 @@ public class AddReservationRequest {
         return branchId;
     }
 
+
     public void setBranchId(long branchId) {
         this.branchId = branchId;
+    }
+
+    public void calculateAndSaveCost() {
+        //this.cost = this.car.getBasePricePerDay() * TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS))this.reservationEnd;
+
     }
 }

@@ -23,7 +23,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.InlineView;
+
 import java.time.LocalDateTime;
+
+import java.util.LinkedList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +38,16 @@ public class CustomerController {
     private BranchServiceImpl branchService;
     private CarServiceImpl carService;
     private ReservationServiceImpl reservationService;
-    public static Customer customer;
+
+    private static Customer customer;
+
+    public static Customer getCustomer() {
+        return customer;
+    }
+
+    public static void setCustomer(Customer customer) {
+        CustomerController.customer = customer;
+    }
 
     public CustomerController(CustomerServiceImpl customerService,
                               BranchServiceImpl branchService,
@@ -61,6 +74,12 @@ public class CustomerController {
     public String showCars(Model model){
         List<Car> cars = carService.findAll();
         model.addAttribute("cars", cars);
+        Customer customer = (Customer) model.getAttribute("user");
+        List<AddReservationRequest> addReservationRequests = new LinkedList<>();
+        for(Car car: cars){
+            addReservationRequests.add(new AddReservationRequest(car, customer));
+        }
+        model.addAttribute("addReservationRequests", addReservationRequests);
         return "customer/cars";
     }
 
@@ -87,8 +106,16 @@ public class CustomerController {
     }
 
     @RequestMapping("/panel")
-    public String viewPanel(){
+    public String viewPanel() {
         return "customer/panel";
+    }
+
+    @RequestMapping("/createReservation")
+    public String createReservation(@RequestParam("AddReservationRequest") AddReservationRequest addReservationRequest,
+                                    Model model){
+        addReservationRequest.setCustomer(CustomerController.getCustomer());
+        reservationService.addReservation(addReservationRequest);
+        return "customer/reservations";
     }
 
 }

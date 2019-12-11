@@ -4,6 +4,7 @@ import com.mkcomp.CarRentalApp.api.request.AddCustomerRequest;
 import com.mkcomp.CarRentalApp.api.request.LoginRequest;
 import com.mkcomp.CarRentalApp.model.Customer;
 import com.mkcomp.CarRentalApp.model.Employee;
+import com.mkcomp.CarRentalApp.service.CarService;
 import com.mkcomp.CarRentalApp.service.CustomerService;
 import com.mkcomp.CarRentalApp.service.EmployeeService;
 import com.mkcomp.CarRentalApp.service.impl.CustomerServiceImpl;
@@ -17,17 +18,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
     CustomerServiceImpl customerService;
+    CarService carService;
     EmployeeServiceImpl employeeService;
 
-    public HomeController(CustomerServiceImpl customerService, EmployeeServiceImpl employeeService) {
+    public HomeController(CustomerServiceImpl customerService, CarService carService, EmployeeServiceImpl employeeService) {
         this.customerService = customerService;
+        this.carService = carService;
         this.employeeService = employeeService;
     }
 
     @RequestMapping("/")
     public String viewHomePage(Model model) {
         model.addAttribute("theDate", new java.util.Date());
-
+        model.addAttribute("cars",carService.findAll());
         return "index";
     }
 
@@ -55,8 +58,9 @@ public class HomeController {
         }
         Customer customer = customerService.findCustomerByUserNameAndPassword(request);
         if (customer != null) {
-            CustomerController.customer = customer;
+            CustomerController.setCustomer(customer);
             model.addAttribute("user", customer);
+            CustomerController.setCustomer(customer);
             return "customer/panel";
         }
         return "invalid-login";
