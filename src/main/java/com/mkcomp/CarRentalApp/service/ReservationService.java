@@ -1,6 +1,7 @@
 package com.mkcomp.CarRentalApp.service;
 
 import com.mkcomp.CarRentalApp.api.request.AddReservationRequest;
+import com.mkcomp.CarRentalApp.model.Customer;
 import com.mkcomp.CarRentalApp.model.Reservation;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface ReservationService {
     boolean makeAnAdvancePayment(long reservationId);
     List<Reservation> findAll();
     Reservation findById(Long id);
+    Long addReservation(Reservation reservation);
+    List<Reservation> findReservationsByCustomer(Customer customer);
 
 }

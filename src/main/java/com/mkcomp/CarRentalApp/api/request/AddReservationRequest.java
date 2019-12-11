@@ -5,7 +5,7 @@ import com.mkcomp.CarRentalApp.model.Customer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -96,8 +96,17 @@ public class AddReservationRequest {
         this.branchId = branchId;
     }
 
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
     public void calculateAndSaveCost() {
         //this.cost = this.car.getBasePricePerDay() * TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS))this.reservationEnd;
 
     }
+
 }

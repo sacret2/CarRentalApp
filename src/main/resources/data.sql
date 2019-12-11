@@ -37,11 +37,11 @@ VALUES (1001, 'u1@gmail.com', 'Grzegorz', 'Fruwa', 'a', 'a', 1001),
        (1002,'u2@gmail.com','Andrzej','Skorupa','pass2','endrju', 1002);
 
 INSERT INTO public.reservation(
-    id, cost, reservation_date, reservation_end, reservation_start, car_id, customer_id)
-VALUES (1001, 500, DATE'2020-10-10', DATE'2020-10-14', DATE'2020-06-22', 1001, 1001),
-       (1002, 400, DATE'2020-10-09', DATE'2020-10-11', DATE'2020-08-10', 1002, 1002),
-       (1003, 300, DATE'2020-11-10', DATE'2020-10-14', DATE'2020-06-12', 1001, 1002),
-       (1004, 1200, DATE'2020-11-12', DATE'2020-12-15', DATE'2020-07-05', 1003, 1001);
+    id, cost, reservation_start, reservation_end, reservation_date, car_id, customer_id) VALUES
+    (1001, 500, DATE'2020-10-10', DATE'2020-10-14', DATE'2020-06-22', 1001, 1001),
+       (1002, 400, DATE'2020-10-09', DATE'2020-10-13', DATE'2020-08-10', 1002, 1002),
+       (1003, 300, DATE'2020-11-10', DATE'2020-11-18', DATE'2020-06-12', 1001, 1002),
+       (1004, 1200, DATE'2020-12-12', DATE'2020-12-21', DATE'2020-07-05', 1003, 1001);
 
 INSERT INTO public.damage(
     id, damage_penalty, description)

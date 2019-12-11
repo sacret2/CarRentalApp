@@ -3,11 +3,16 @@ package com.mkcomp.CarRentalApp.service.impl;
 import com.mkcomp.CarRentalApp.api.request.AddCarRequest;
 import com.mkcomp.CarRentalApp.model.Branch;
 import com.mkcomp.CarRentalApp.model.Car;
+import com.mkcomp.CarRentalApp.model.Reservation;
 import com.mkcomp.CarRentalApp.repository.BranchRepository;
 import com.mkcomp.CarRentalApp.repository.CarRepository;
 import com.mkcomp.CarRentalApp.service.CarService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +67,28 @@ public class CarServiceImpl implements CarService {
         return carRepository.save(car);
     }
 
+    @Override
+    public List<Car> findAvailableCars(LocalDateTime startDate, LocalDateTime endDate, long branchId) {
+        Branch branch = branchRepository.getOne(branchId);
 
+        List<Car> carsFromTheBranch = carRepository.findAllByBranchIs(branch);
+        List<Car> availableCars = new ArrayList<>();
 
+        LocalDateTime reservationEnd;
+        LocalDateTime reservationStart;
+        for (Car c : carsFromTheBranch) {
+            List<Reservation> reservations = c.getReservations();
+            boolean isAvailable = true;
+            if (reservations != null) {
+                for (Reservation r : reservations){
+                    reservationEnd = r.getReservationEnd();
+                    reservationStart = r.getReservationStart();
+                    if (!((startDate.isBefore(reservationStart) && endDate.isBefore(reservationStart)) ||
+                    startDate.isAfter(reservationEnd) && endDate.isAfter(reservationEnd))) isAvailable = false;
+                }
+            }
+            if (isAvailable) availableCars.add(c);
+        }
+        return availableCars;
+    }
 }

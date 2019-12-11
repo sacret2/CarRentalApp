@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="employee/template :: index_head">
+</head>
+<body>
+<nav th:replace="employee/template :: navbar"></nav>
+<br>
+<div align="center">
+    <br>
+    <h3 th:text="'Cars available from: ' + ${addReservationRequest.reservationStart} +
+    ' until: ' + ${addReservationRequest.reservationEnd} + ' in the city of: ' +
+    ${city}"></h3>
+    <br>
+    <table border ="1">
+        <thead style="text-align: center">
+        <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Production Year</th>
+            <th>Specification</th>
+            <th>Base Price Per Day</th>
+            <th>Branch Location</th>
+            <th>Total Cost</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table table-striped" th:each="tempCar : ${availableCars}">
+            <td th:text="${tempCar.brand}"/>
+            <td th:text="${tempCar.model}"/>
+            <td th:text="${tempCar.productionYear}"/>
+            <td th:text="${tempCar.specification}"/>
+            <td th:text="${tempCar.basePricePerDay}"/>
+            <td th:text="${tempCar.branch.address.city} +' '+ ${tempCar.branch.address.street} +' '+ ${tempCar.branch.address.streetNumber}"/>
+            <td th:with="result=${days * tempCar.basePricePerDay}" th:text="${result}"/>
+            <td>
+                <a th:href="@{/customer/availableCars/createReservation(carId=${tempCar.id}, request=${addReservationRequest})}" class="btn btn-success btn-sm">Make Reservation</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="employee/template :: app_footer"></footer>
+</body>
+</html>

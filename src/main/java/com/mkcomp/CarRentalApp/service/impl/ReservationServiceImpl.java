@@ -1,6 +1,7 @@
 package com.mkcomp.CarRentalApp.service.impl;
 
 import com.mkcomp.CarRentalApp.api.request.AddReservationRequest;
+import com.mkcomp.CarRentalApp.model.Customer;
 import com.mkcomp.CarRentalApp.model.Reservation;
 import com.mkcomp.CarRentalApp.repository.ReservationRepository;
 import com.mkcomp.CarRentalApp.service.ReservationService;
@@ -46,5 +47,15 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation findById(Long id) {
         return reservationRepository.getOne(id);
+    }
+
+    @Override
+    public Long addReservation(Reservation reservation) {
+        return reservationRepository.save(reservation).getId();
+    }
+
+    @Override
+    public List<Reservation> findReservationsByCustomer(Customer customer) {
+        return reservationRepository.findAllByCustomerIs(customer);
     }
 }
