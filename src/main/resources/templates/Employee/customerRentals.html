@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="employee/template :: index_head">
-
+</head>
+<head>
+    <link th:href="@{../css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{../css/styles.css}" rel="stylesheet" />
 </head>
 <body>
 <nav th:replace="employee/template :: navbar"></nav>

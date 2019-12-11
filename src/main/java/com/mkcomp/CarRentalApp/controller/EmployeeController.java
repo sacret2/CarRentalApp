@@ -1,6 +1,7 @@
 package com.mkcomp.CarRentalApp.controller;
 
 import com.mkcomp.CarRentalApp.api.request.AddCarRequest;
+import com.mkcomp.CarRentalApp.api.request.AddReservationRequest;
 import com.mkcomp.CarRentalApp.model.Damage;
 import com.mkcomp.CarRentalApp.api.request.AddRentalRequest;
 import com.mkcomp.CarRentalApp.model.*;
@@ -51,11 +52,19 @@ public class EmployeeController {
         return "employee/reservations";
     }
 
-    @RequestMapping("/reservations/createRental")
-    public String showFormForRental(@RequestParam("addRentalRequest") AddRentalRequest addRentalRequest,
-                                    Model model){
-        model.addAttribute("addRentalRequest", addRentalRequest);
-        return "employee/createRental";
+    @RequestMapping("/createRental")
+    public String showFormForRental(@RequestParam("reservationId") long reservationId){
+        AddRentalRequest addRentalRequest = new AddRentalRequest();
+        addRentalRequest.setReservation(reservationService.findById(reservationId));
+        rentalService.addRental(addRentalRequest);
+        return "employee/panel";
+    }
+
+    @RequestMapping("/rental")
+    public String showRental(@RequestParam("rentalId") long rentalId, Model model){
+        Rental rental = rentalService.getRental(rentalId);
+        model.addAttribute("rental", rental);
+        return "employee/rental?rentalId";
     }
 
     @RequestMapping("/cars/addCar")
