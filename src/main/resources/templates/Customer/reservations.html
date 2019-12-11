@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="employee/template :: index_head">
+<head th:include="customer/template :: index_head">
 
 </head>
 <body>
-<nav th:replace="employee/template :: navbar"></nav>
+<nav th:replace="customer/template :: navbar"></nav>
 
 <br>
 <div align="center">
-    <a th:href="@{/customer/findCar}" class="btn btn-primary btn-sm mb-3">Add New Reservation</a>
+    <a th:href="@{/customer/findCars}" class="btn btn-primary btn-sm mb-3">Add New Reservation</a>
     <table border ="1">
         <thead style="text-align: center">
         <tr>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Production Year</th>
-            <th>Specification</th>
-            <th>Base Price Per Day</th>
-            <th>Branch Location</th>
+            <th>Car</th>
+            <th>Cost</th>
+            <th>Reservation date</th>
+            <th>Reservation from</th>
+            <th>Reservation to</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr class="table table-striped" th:each="reservation : ${reservations}">
-            <td th:text="${reservation.id}"/>
-            <td th:text="${reservation.id}"/>
-            <td th:text="${reservation.id}"/>
-            <td th:text="${reservation.id}"/>
-            <td th:text="${reservation.id}"/>
-            <td th:text="${reservation.id}"/>
+            <td th:text="${reservation.car}"/>
+            <td th:text="${reservation.cost}"/>
+            <td th:text="${reservation.reservationDate}"/>
+            <td th:text="${reservation.reservationStart}"/>
+            <td th:text="${reservation.reservationEnd}"/>
             <td>
                 <a th:href="@{/customer/reservations/update(reservationId=${reservation.id})}" class="btn btn-info btn-sm">Update</a>
                 <a th:href="@{/customer/reservations/delete(reservationId=${reservation.id})}" class="btn btn-danger btn-sm"
@@ -39,6 +37,6 @@
     </table>
 </div>
 
-<footer th:replace="employee/template :: app_footer"></footer>
+<footer th:replace="customer/template :: app_footer"></footer>
 </body>
 </html>

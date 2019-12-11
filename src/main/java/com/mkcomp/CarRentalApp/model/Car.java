@@ -94,4 +94,13 @@ public class Car {
     public void setBranch(Branch location) {
         this.branch = location;
     }
+
+    @Override
+    public String toString() {
+        return
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", productionYear=" + productionYear +
+                ", specification='" + specification;
+    }
 }
