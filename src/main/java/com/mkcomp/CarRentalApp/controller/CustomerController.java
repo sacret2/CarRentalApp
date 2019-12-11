@@ -122,9 +122,9 @@ public class CustomerController {
     public String viewReservations(Model model){
         List<Reservation> reservations = reservationService.findReservationsByCustomer(customer);
         model.addAttribute("reservations", reservations);
+
         return "customer/reservations";
     }
-
 
 
     @RequestMapping("/availableCars/createReservation")
