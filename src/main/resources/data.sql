@@ -19,7 +19,7 @@ INSERT INTO public.car(
 INSERT INTO public.employee(
 	id, first_name, last_name, user_name, password, "position", is_admin , branch_id) VALUES
 	(1001, 'Piotr', 'Nowak', 'admin', 'admin', 'administrator', TRUE, 1001),
-	(1002, 'Adam', 'Kowalski', 'adamk', 'qwerty', 'director', FALSE, 1001),
+	(1002, 'Adam', 'Kowalski', 'e', 'e', 'director', FALSE, 1001),
 	(1003, 'Anna', 'Jabłońska', 'anna85', 'jablko123', 'accountant', FALSE, 1001),
 	(1004, 'Justyna', 'Duda', 'justi', 'j2355', 'salesman', FALSE, 1001),
 	(1005, 'Jan', 'Miller', 'janmil', 'm88jan', 'salesman', FALSE, 1001),

@@ -2,6 +2,7 @@ package com.mkcomp.CarRentalApp.api.request;
 
 import com.mkcomp.CarRentalApp.model.Car;
 import com.mkcomp.CarRentalApp.model.Customer;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,14 +10,19 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+
 import java.time.format.DateTimeFormatter;
 
 public class AddReservationRequest {
+
     private LocalDateTime reservationDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date reservationStart;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date reservationEnd;
     private Car car;
     private Customer customer;
+    private long branchId;
     private double cost;
 
     public AddReservationRequest() {
@@ -39,6 +45,7 @@ public class AddReservationRequest {
         }
         return null;
     }
+
 
     public LocalDateTime getReservationDate() {
         return reservationDate;
@@ -80,11 +87,17 @@ public class AddReservationRequest {
         this.customer = customer;
     }
 
-    public double getCost() {
-        return cost;
+    public long getBranchId() {
+        return branchId;
+    }
+
+
+    public void setBranchId(long branchId) {
+        this.branchId = branchId;
     }
 
     public void calculateAndSaveCost() {
         //this.cost = this.car.getBasePricePerDay() * TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS))this.reservationEnd;
+
     }
 }

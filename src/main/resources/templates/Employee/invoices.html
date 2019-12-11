@@ -5,6 +5,34 @@
 </head>
 <body>
 <nav th:replace="employee/template :: navbar"></nav>
+<div align="center">
+    <br>
+    <h2>Rentals</h2>
+    <br>
+    <table border ="1">
+        <thead style="text-align: center">
+        private long id;
+        private LocalDateTime issueDate;
+
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "rental_id")
+        private Rental rental;
+        <tr>
+            <th>ID</th>
+            <th>Issue date</th>
+            <th>Rental ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table table-striped" th:each="invoice, iterStat : ${invoices}">
+            <td th:text="${invoice.id}"/>
+            <td th:text="${invoice.issueDate}"/>
+            <td th:text="${invoice.rental.Id}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 <footer th:replace="employee/template :: app_footer"></footer>
 </body>
 </html>

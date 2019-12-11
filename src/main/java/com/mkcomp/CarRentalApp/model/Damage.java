@@ -1,9 +1,6 @@
 package com.mkcomp.CarRentalApp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Damage {
@@ -15,4 +12,30 @@ public class Damage {
     private String description;
     private double damagePenalty;
 
+    public Damage() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getDamagePenalty() {
+        return damagePenalty;
+    }
+
+    public void setDamagePenalty(double damagePenalty) {
+        this.damagePenalty = damagePenalty;
+    }
 }

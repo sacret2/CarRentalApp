@@ -1,12 +1,12 @@
 package com.mkcomp.CarRentalApp.controller;
 
 import com.mkcomp.CarRentalApp.api.request.AddCarRequest;
-import com.mkcomp.CarRentalApp.api.request.AddDamageRequest;
+import com.mkcomp.CarRentalApp.model.Damage;
 import com.mkcomp.CarRentalApp.api.request.AddRentalRequest;
-import com.mkcomp.CarRentalApp.model.Branch;
-import com.mkcomp.CarRentalApp.model.Car;
-import com.mkcomp.CarRentalApp.model.Reservation;
-import com.mkcomp.CarRentalApp.service.ReservationService;
+import com.mkcomp.CarRentalApp.model.*;
+import com.mkcomp.CarRentalApp.service.DamageService;
+import com.mkcomp.CarRentalApp.service.InvoiceService;
+import com.mkcomp.CarRentalApp.service.RentalService;
 import com.mkcomp.CarRentalApp.service.impl.BranchServiceImpl;
 import com.mkcomp.CarRentalApp.service.impl.CarServiceImpl;
 import com.mkcomp.CarRentalApp.service.impl.ReservationServiceImpl;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -22,27 +23,37 @@ public class EmployeeController {
     private BranchServiceImpl branchService;
     private CarServiceImpl carService;
     private ReservationServiceImpl reservationService;
+    private InvoiceService invoiceService;
+    private RentalService rentalService;
+    private DamageService damageService;
+    private static Employee employee;
 
-    public EmployeeController(BranchServiceImpl branchService, CarServiceImpl carService) {
+    public EmployeeController(BranchServiceImpl branchService, CarServiceImpl carService, ReservationServiceImpl reservationService, InvoiceService invoiceService, RentalService rentalService, DamageService damageService) {
         this.branchService = branchService;
         this.carService = carService;
+        this.reservationService = reservationService;
+        this.invoiceService = invoiceService;
+        this.rentalService = rentalService;
+        this.damageService = damageService;
     }
 
     @RequestMapping("/reservations")
     public String showReservations(Model model){
         List<Reservation> reservations = reservationService.findAll();
         model.addAttribute("reservations", reservations);
+        List<AddRentalRequest> addRentalRequests = new LinkedList<>();
+        for(Reservation reservation : reservations){
+            AddRentalRequest addRentalRequest = new AddRentalRequest();
+            addRentalRequest.setReservation(reservation);
+            addRentalRequests.add(addRentalRequest);
+        }
+        model.addAttribute("addRentalRequests", addRentalRequests);
         return "employee/reservations";
     }
 
-    @PostMapping("/reservations/createRental")
-    public String showFormForRental(@RequestParam("reservationId") long id, Model model){
-        Reservation reservation = reservationService.findById(id);
-        AddDamageRequest addDamageRequest = new AddDamageRequest();
-        model.addAttribute("addDamageRequest", addDamageRequest);
-        AddRentalRequest addRentalRequest = new AddRentalRequest();
-        addRentalRequest.setDamageRequest(addDamageRequest);
-        addRentalRequest.setReservation(reservation);
+    @RequestMapping("/reservations/createRental")
+    public String showFormForRental(@RequestParam("addRentalRequest") AddRentalRequest addRentalRequest,
+                                    Model model){
         model.addAttribute("addRentalRequest", addRentalRequest);
         return "employee/createRental";
     }
@@ -86,7 +97,6 @@ public class EmployeeController {
         return "employee/addCar";
     }
 
-
     @PostMapping("/saveCar")
     public String saveCar(@ModelAttribute("addCarRequest") AddCarRequest request){
         carService.addCar(request);
@@ -98,5 +108,30 @@ public class EmployeeController {
         return "employee/panel";
     }
 
+    public static Employee getEmployee() {
+        return employee;
+    }
 
+    @RequestMapping("/invoices")
+    public String showInvoices(Model model){
+        List<Invoice> invoices = invoiceService.findAll();
+        model.addAttribute("cars", invoices);
+        return "employee/invoices";
+    }
+
+    @RequestMapping("/rentals")
+    public String showRentals(Model model){
+        List<Rental> rentals = rentalService.getAllRentals();
+        model.addAttribute("rentals", rentals);
+        List<Damage> damages = new LinkedList<>();
+        for(Rental rental : rentals){
+            damages.add(rental.getDamage());
+        }
+        model.addAttribute("damages", damages);
+        return "employee/rentals";
+    }
+
+    public static void setEmployee(Employee employee) {
+        EmployeeController.employee = employee;
+    }
 }
