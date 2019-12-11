@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.swing.text.html.InlineView;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +36,16 @@ public class CustomerController {
     private BranchServiceImpl branchService;
     private CarServiceImpl carService;
     private ReservationServiceImpl reservationService;
+    private static Customer customer;
 
-    @Autowired
+    public static Customer getCustomer() {
+        return customer;
+    }
+
+    public static void setCustomer(Customer customer) {
+        CustomerController.customer = customer;
+    }
+
     public CustomerController(CustomerServiceImpl customerService,
                               BranchServiceImpl branchService,
                               CarServiceImpl carService,
@@ -45,10 +54,6 @@ public class CustomerController {
         this.branchService = branchService;
         this.carService = carService;
         this.reservationService = reservationService;
-    }
-
-    public CustomerController(CustomerServiceImpl customerService) {
-        this.customerService = customerService;
     }
 
     @PostMapping("/register")
@@ -66,14 +71,19 @@ public class CustomerController {
     public String showCars(Model model){
         List<Car> cars = carService.findAll();
         model.addAttribute("cars", cars);
+        Customer customer = (Customer) model.getAttribute("user");
+        List<AddReservationRequest> addReservationRequests = new LinkedList<>();
+        for(Car car: cars){
+            addReservationRequests.add(new AddReservationRequest(car, customer));
+        }
+        model.addAttribute("addReservationRequests", addReservationRequests);
         return "customer/cars";
     }
 
     @RequestMapping("/createReservation")
     public String createReservation(@RequestParam("AddReservationRequest") AddReservationRequest addReservationRequest,
-                                    @RequestParam("CarId") long carId){
-        Car car = carService.findCarById(carId);
-        addReservationRequest.setCar(car);
+                                    Model model){
+        addReservationRequest.setCustomer(CustomerController.getCustomer());
         reservationService.addReservation(addReservationRequest);
         return "customer/reservations";
     }

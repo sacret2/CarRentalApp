@@ -5,6 +5,35 @@
 </head>
 <body>
 <nav th:replace="template :: navbar"></nav>
+<br>
+<div align="center">
+    <table border ="1" style="background: rgb(200,200,250)">
+        <thead style="text-align: center">
+        <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Production Year</th>
+            <th>Specification</th>
+            <th>Base Price Per Day</th>
+            <th>Branch Location</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr class="table table-striped" th:each="tempCar : ${cars}">
+                <td th:text="${tempCar.brand}"/>
+                <td th:text="${tempCar.model}"/>
+                <td th:text="${tempCar.productionYear}"/>
+                <td th:text="${tempCar.specification}"/>
+                <td th:text="${tempCar.basePricePerDay}"/>
+                <td th:text="${tempCar.branch.address.city} +' '+ ${tempCar.branch.address.street} +' '+ ${tempCar.branch.address.streetNumber}"/>
+                <td>
+                    <a th:href="loginForm" class="btn btn-primary btn-sm mb-3">Make reservation</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

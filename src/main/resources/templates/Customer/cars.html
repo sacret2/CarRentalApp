@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="template :: index_head">
+<head th:include="customer/template :: index_head">
 
 </head>
 <body>
-<nav th:replace="template :: navbar"></nav>
+<nav th:replace="customer/template :: navbar"></nav>
 <br>
 <div align="center">
     <table border ="1">
@@ -16,12 +16,15 @@
             <th>Specification</th>
             <th>Base Price Per Day</th>
             <th>Branch Location</th>
+            <th>Reservation From</th>
+            <th>Reservation Until</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="table table-striped" th:each="tempCar : ${cars}">
-            <form th:action="$@{/customer/cars/createReservation}" th:object="${addReservationRequest}">
+        <tr class="table table-striped" th:each="tempCar, iterStat : ${cars}">
+            <form action="#" th:action="@{/customer/cars/createReservation}"
+                  th:object="${addReservationRequests[__${iterStat.index}__]} " method="POST">
                 <td th:text="${tempCar.brand}"/>
                 <td th:text="${tempCar.model}"/>
                 <td th:text="${tempCar.productionYear}"/>
@@ -29,21 +32,19 @@
                 <td th:text="${tempCar.basePricePerDay}"/>
                 <td th:text="${tempCar.branch.address.city} +' '+ ${tempCar.branch.address.street} +' '+ ${tempCar.branch.address.streetNumber}"/>
                 <td>
-                    <input type="datetime-local" th:field="*{reservationStart}">
+                    <input type="date" th:value="*{reservationStart}">
                 </td>
                 <td>
-                    <input type="datetime-local" th:field="*{reservationEnd}">
+                    <input type="date" th:value="*{reservationEnd}">
                 </td>
                 <td>
-                    <a th:href="@{/customer/cars/createReservation(${addReservationRequest}, ${tempCar.Id}))"
-                       class="btn btn-primary btn-sm mb-3">Make reservation</a>
+                    <button th:type="submit" class="btn btn-primary btn-sm mb-3">Make reservation</button>
                 </td>
             </form>
-
         </tr>
         </tbody>
     </table>
 </div>
-<footer th:replace="template :: app_footer"></footer>
+<footer th:replace="customer/template :: app_footer"></footer>
 </body>
 </html>
