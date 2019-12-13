@@ -36,6 +36,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class used as controller for .html files under src/main/resources/templates/Customer/
+ */
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {

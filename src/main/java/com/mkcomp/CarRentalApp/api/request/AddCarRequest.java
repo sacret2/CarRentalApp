@@ -2,7 +2,9 @@ package com.mkcomp.CarRentalApp.api.request;
 
 import com.mkcomp.CarRentalApp.model.Branch;
 
-
+/**
+ * Class used as data wrapper for Car requests
+ */
 public class AddCarRequest {
     private long carId;
     private String brand;

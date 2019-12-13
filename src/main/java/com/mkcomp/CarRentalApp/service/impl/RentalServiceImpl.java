@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 
+/**
+ * Service layer class for CRUD operations on Rental objects
+ */
 @Service
 public class RentalServiceImpl implements RentalService {
     private RentalRepository rentalRepository;
@@ -22,6 +25,9 @@ public class RentalServiceImpl implements RentalService {
         this.damageRepository = damageRepository;
     }
 
+    /**
+     * Additionally, saves a Damage object associated with the Rental being saved
+     */
     @Override
     public Long addRental(AddRentalRequest request) {
         Rental rental = new Rental();

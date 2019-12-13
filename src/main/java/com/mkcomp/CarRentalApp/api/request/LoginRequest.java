@@ -1,5 +1,8 @@
 package com.mkcomp.CarRentalApp.api.request;
 
+/**
+ * Class used as data wrapper for Login requests
+ */
 public class LoginRequest {
     public String userName;
     public String password;

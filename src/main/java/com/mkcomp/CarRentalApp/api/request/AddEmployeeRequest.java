@@ -2,6 +2,9 @@ package com.mkcomp.CarRentalApp.api.request;
 
 import com.mkcomp.CarRentalApp.model.Branch;
 
+/**
+ * Class used as data wrapper for Employee requests
+ */
 public class AddEmployeeRequest {
     private String firstName;
     private String lastName;
