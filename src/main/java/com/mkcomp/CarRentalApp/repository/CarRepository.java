@@ -6,7 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
+/**
+ * Interface between Postgres database and application logic declaring CRUD methods for Car objects
+ */
 public interface CarRepository extends JpaRepository<Car, Long> {
 
-        List<Car> findAllByBranchIs(Branch branch);
+        List<Car> findAllFromBranch(Branch branch);
 }

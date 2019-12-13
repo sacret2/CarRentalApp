@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service layer class for CRUD operations on Branch and Adress objects
+ */
 @Service
 public class BranchServiceImpl implements BranchService {
     BranchRepository branchRepository;

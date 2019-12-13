@@ -5,6 +5,9 @@ import com.mkcomp.CarRentalApp.model.Branch;
 
 import java.util.List;
 
+/**
+ * Service layer class for CRUD operations on Branch and Adress objects
+ */
 public interface BranchService {
 
     List<Branch> findAll();

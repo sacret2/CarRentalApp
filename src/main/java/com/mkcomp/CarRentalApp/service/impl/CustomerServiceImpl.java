@@ -9,6 +9,9 @@ import com.mkcomp.CarRentalApp.repository.CustomerRepository;
 import com.mkcomp.CarRentalApp.service.CustomerService;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service layer class for CRUD operations on Customer objects
+ */
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private AddressRepository addressRepository;

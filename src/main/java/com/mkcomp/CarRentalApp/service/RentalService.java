@@ -5,6 +5,9 @@ import com.mkcomp.CarRentalApp.model.Rental;
 
 import java.util.List;
 
+/**
+ * Service layer class for CRUD operations on Rental objects
+ */
 public interface RentalService {
 
     Long addRental(AddRentalRequest request);

@@ -4,6 +4,9 @@ import com.mkcomp.CarRentalApp.api.request.AddCustomerRequest;
 import com.mkcomp.CarRentalApp.api.request.LoginRequest;
 import com.mkcomp.CarRentalApp.model.Customer;
 
+/**
+ * Service layer class for CRUD operations on Customer objects
+ */
 public interface CustomerService {
 
     long addCustomer(AddCustomerRequest request);

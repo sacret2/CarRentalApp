@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service layer class for CRUD operations on Invoice objects
+ */
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
     InvoiceRepository invoiceRepository;

@@ -10,12 +10,13 @@ import com.mkcomp.CarRentalApp.service.CarService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service layer class for CRUD operations on Car objects
+ */
 @Service
 public class CarServiceImpl implements CarService {
     private CarRepository carRepository;
@@ -48,6 +49,11 @@ public class CarServiceImpl implements CarService {
         carRepository.deleteById(id);
     }
 
+    /**
+     *
+     * @param branchId
+     * @return a Branch from a database with id specified by branchId or null if there is no such Branch.
+     */
     private Branch extractBranchFromRepository(Long branchId) {
         Optional<Branch> optionalBranch = branchRepository.findById(branchId);
         if (!optionalBranch.isPresent()) {
@@ -67,17 +73,24 @@ public class CarServiceImpl implements CarService {
         return carRepository.save(car);
     }
 
+    /**
+     *
+     * @param startDate
+     * @param endDate
+     * @param branchId
+     * @return returns a List of available cars from a Branch with a given id (that is cars that are not reserved or rented in the specified period of time).
+     */
     @Override
     public List<Car> findAvailableCars(LocalDateTime startDate, LocalDateTime endDate, long branchId) {
         Branch branch = branchRepository.getOne(branchId);
 
-        List<Car> carsFromTheBranch = carRepository.findAllByBranchIs(branch);
+        List<Car> carsFromTheBranch = carRepository.findAllFromBranch(branch);
         List<Car> availableCars = new ArrayList<>();
 
         LocalDateTime reservationEnd;
         LocalDateTime reservationStart;
-        for (Car c : carsFromTheBranch) {
-            List<Reservation> reservations = c.getReservations();
+        for (Car car : carsFromTheBranch) {
+            List<Reservation> reservations = car.getReservations();
             boolean isAvailable = true;
             if (reservations != null) {
                 for (Reservation r : reservations){
@@ -87,7 +100,8 @@ public class CarServiceImpl implements CarService {
                     startDate.isAfter(reservationEnd) && endDate.isAfter(reservationEnd))) isAvailable = false;
                 }
             }
-            if (isAvailable) availableCars.add(c);
+            if (isAvailable)
+                availableCars.add(car);
         }
         return availableCars;
     }

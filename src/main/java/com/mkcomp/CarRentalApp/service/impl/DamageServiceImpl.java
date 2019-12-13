@@ -9,6 +9,9 @@ import com.mkcomp.CarRentalApp.service.DamageService;
 import javax.persistence.OneToOne;
 import java.util.List;
 
+/**
+ * Service layer class for CRUD operations on Damage objects
+ */
 @Service
 public class DamageServiceImpl implements DamageService {
     DamageRepository damageRepository;

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Class used as controller for .html files directly under src/main/resources/templates/
+ */
 @Controller
 public class HomeController {
     CustomerServiceImpl customerService;
