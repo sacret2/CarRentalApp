@@ -41,45 +41,45 @@ After the customer has returned the car overtime a special overdue penalty is ad
 
 ### Home page  
 
-<img src="ressources\static\img\readme\home.png" alt="Home view">  
+<img src="src\main\resources\static\img\readme\home.png" alt="Home view">  
 After clicking on Register button you are redirected to the user registration form:
-<img src="ressources\static\img\readme\homeCreateUserForm.png" alt="Home view">  
+<img src="src\main\resources\static\img\readme\homeCreateUserForm.png" alt="Home view">  
 After clicking on Login button you are redirected to the user login form:
-<img src="ressources\static\img\readme\homeLogin.png" alt="Home view">  
+<img src="src\main\resources\static\img\readme\homeLogin.png" alt="Home view">  
 
 ### Employee User Case  
 
 After passing the correct credentials and clicking Login you are authenticated. You may see now the main user panel (pictured below) adequate to the user type - in this case it's an *employee* user type. Let's see cars in your offer by clicking the *Cars* button:
-<img src="ressources\static\img\readme\ECarsClick.png" alt="E cars click">  
+<img src="src\main\resources\static\img\readme\ECarsClick.png" alt="E cars click">  
 The list of available cars appears:
-<img src="ressources\static\img\readme\EAddCarClick.png" alt="E add car click"> 
+<img src="src\main\resources\static\img\readme\EAddCarClick.png" alt="E add car click"> 
 You may add a new car by cliking an *Add new car* button and provide details in the ensuing form:
-<img src="ressources\static\img\readme\EAddCarForm.png" alt="E add car form"> 
+<img src="src\main\resources\static\img\readme\EAddCarForm.png" alt="E add car form"> 
 Then the car is on the list.  
 You may edit the car by clicking an *Update* button which redirects you to the update form:
-<img src="ressources\static\img\readme\EUpdateCarClick.png" alt="E Update Car Click"> 
+<img src="src\main\resources\static\img\readme\EUpdateCarClick.png" alt="E Update Car Click"> 
 Here, in the update form we change the base price and click *Add car*:
-<img src="ressources\static\img\readme\EUpdateCar.png" alt="E Car Edited"> 
+<img src="src\main\resources\static\img\readme\EUpdateCar.png" alt="E Car Edited"> 
 The changes appear on the car list:
-<img src="ressources\static\img\readme\ECarEdited.png" alt="E Car Edited"> 
+<img src="src\main\resources\static\img\readme\ECarEdited.png" alt="E Car Edited"> 
 You may also delete car by clicking the *delete* button next to a chosen car:
-<img src="ressources\static\img\readme\ECarDeleteClick.png" alt="E Car Delete Click"> 
+<img src="src\main\resources\static\img\readme\ECarDeleteClick.png" alt="E Car Delete Click"> 
 And, as expected, the car is no longer present on the list:
-<img src="ressources\static\img\readme\ECarDeletedRes.png" alt="E Car Deleted Res"> 
+<img src="src\main\resources\static\img\readme\ECarDeletedRes.png" alt="E Car Deleted Res"> 
 Now in the user panel let's click the *Reservations* button:
-<img src="ressources\static\img\readme\EReservationsClick.png" alt="E Reservations Click"> 
+<img src="src\main\resources\static\img\readme\EReservationsClick.png" alt="E Reservations Click"> 
 And then create a new Rental from a Reservation (reservation is automaticaly deleted as a consequence):
-<img src="ressources\static\img\readme\ECreateRentalClick.png" alt="E Create Rental"> 
+<img src="src\main\resources\static\img\readme\ECreateRentalClick.png" alt="E Create Rental"> 
 Now we specify the actual date of car returning and the overdue penalty and click *Add Rental*:
-<img src="ressources\static\img\readme\EAddRentalClick.png" alt="E Add Rental Click"> 
+<img src="src\main\resources\static\img\readme\EAddRentalClick.png" alt="E Add Rental Click"> 
 Let's see if the rental is there by clicking the *Rentals button*: 
-<img src="ressources\static\img\readme\ERentalsClick.png" alt="E Add Rental Click">
+<img src="src\main\resources\static\img\readme\ERentalsClick.png" alt="E Add Rental Click">
 The rental is there and finally we are able to generate an invoice from your rental by clicking the *Create invoice* button:
-<img src="ressources\static\img\readme\ECreateInvoiceClick.png" alt="E Rentals Click"> 
+<img src="src\main\resources\static\img\readme\ECreateInvoiceClick.png" alt="E Rentals Click"> 
 Let's click the *Invoices* button:
-<img src="ressources\static\img\readme\EInvoicesClick.png" alt="E Invoices Click"> 
+<img src="src\main\resources\static\img\readme\EInvoicesClick.png" alt="E Invoices Click"> 
 The authomatically generated invoice from your rental is present as expected:
-<img src="ressources\static\img\readme\EInvoicesList.png" alt="E Invoices List"> 
+<img src="src\main\resources\static\img\readme\EInvoicesList.png" alt="E Invoices List"> 
 
 ## Version 
 Beta
