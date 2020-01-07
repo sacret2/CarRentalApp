@@ -4,6 +4,9 @@ package com.mkcomp.CarRentalApp.model;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Class representing company branch
+ */
 @Entity
 public class Branch {
 

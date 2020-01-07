@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Service layer class defining CRUD operations on Reservation objects
+ */
 @Service
 public class ReservationServiceImpl implements ReservationService {
 

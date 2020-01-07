@@ -1,5 +1,8 @@
 package com.mkcomp.CarRentalApp.api.request;
 
+/**
+ * Class used as a data wrapper for Branch requests
+ */
 public class AddBranchRequest {
     private String postalCode;
     private String street;

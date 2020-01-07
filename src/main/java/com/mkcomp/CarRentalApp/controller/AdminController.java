@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Class used as controller for user of type "admin",
+ * views directory: src/main/resources/templates/Admin/
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {

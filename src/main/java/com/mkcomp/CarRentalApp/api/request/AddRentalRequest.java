@@ -7,6 +7,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+/**
+ * Class used as a data wrapper for Rental requests
+ */
 public class AddRentalRequest {
 
     private boolean wasOverdue;

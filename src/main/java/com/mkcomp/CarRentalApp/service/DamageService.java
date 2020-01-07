@@ -6,6 +6,9 @@ import com.mkcomp.CarRentalApp.model.Damage;
 
 import java.util.List;
 
+/**
+ * Service layer interface declaring CRUD operations on Damage objects
+ */
 public interface DamageService {
     Long saveDamage(Damage damage);
     List<Damage> findAll();

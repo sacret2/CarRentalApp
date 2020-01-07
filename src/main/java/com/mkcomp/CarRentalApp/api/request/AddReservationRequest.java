@@ -13,9 +13,15 @@ import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class used as a data wrapper for Reservation requests
+ */
 public class AddReservationRequest {
 
     private LocalDateTime reservationDate;
+    /**
+     * DateTimeFormat pattern needed for parsing data from HTML
+     */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date reservationStart;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

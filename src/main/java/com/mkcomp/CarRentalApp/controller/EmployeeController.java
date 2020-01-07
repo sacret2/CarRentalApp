@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Class used as controller for user of type "employee",
+ * views directory: src/main/resources/templates/Employee/
+ */
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {

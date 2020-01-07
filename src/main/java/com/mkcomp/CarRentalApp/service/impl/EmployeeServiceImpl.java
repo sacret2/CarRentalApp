@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service layer class defining CRUD operations on Employee objects
+ */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     EmployeeRepository employeeRepository;

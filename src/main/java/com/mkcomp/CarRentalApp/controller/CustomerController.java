@@ -36,6 +36,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class used as controller for user of type "customer",
+ * views directory: src/main/resources/templates/Customer/
+ */
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {

@@ -7,6 +7,9 @@ import com.mkcomp.CarRentalApp.model.Reservation;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Service layer interface declaring CRUD operations on Reservation objects
+ */
 public interface ReservationService {
 
     Long addReservation(AddReservationRequest request);

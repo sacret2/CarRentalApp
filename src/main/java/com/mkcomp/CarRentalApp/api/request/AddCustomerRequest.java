@@ -2,7 +2,9 @@ package com.mkcomp.CarRentalApp.api.request;
 
 import com.mkcomp.CarRentalApp.model.Address;
 
-
+/**
+ * Class used as a data wrapper for Customer requests
+ */
 public class AddCustomerRequest {
 
     private String firstName;
