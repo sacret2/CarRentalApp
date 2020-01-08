@@ -79,7 +79,7 @@ public class CustomerController {
             Customer customer = customerService.findCustomerById(customerId);
             CustomerController.setCustomer(customer);
             model.addAttribute("customer", customer);
-            return "/customer/panel";
+            return "/customer/";
         }
         return "index";
     }
@@ -106,7 +106,6 @@ public class CustomerController {
         return "customer/findCars";
     }
 
-
     @GetMapping("/availableCars")
     public String showFoundCars(@ModelAttribute("addReservationRequest") AddReservationRequest request, Model model) {
 
@@ -127,9 +126,7 @@ public class CustomerController {
         return "customer/availableCars";
     }
 
-
-
-    @RequestMapping("/panel")
+    @RequestMapping("/")
     public String viewPanel() {
         return "customer/panel";
     }
@@ -144,7 +141,7 @@ public class CustomerController {
     }
 
 
-    @RequestMapping("/availableCars/createReservation")
+    @RequestMapping("/createReservation")
     public String createReservation(@RequestParam("carId") long carId,
                                     Model model){
         reservation.setCar(carService.findCarById(carId));
@@ -157,10 +154,10 @@ public class CustomerController {
         return "customer/reservations";
     }
 
-    @RequestMapping("/reservations/delete")
+    @RequestMapping("/deleteReservation")
     public String deleteReservation(@RequestParam("reservationId") long id){
         reservationService.deleteReservation(id);
-        return "customer/panel";
+        return "redirect:/customer/reservations";
     }
 
     @RequestMapping("/invoices")

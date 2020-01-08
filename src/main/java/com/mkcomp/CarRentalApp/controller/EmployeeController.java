@@ -73,13 +73,13 @@ public class EmployeeController {
         return "employee/rental?rentalId";
     }
 
-    @PostMapping("rentals/add")
+    @PostMapping("/addRental")
     public String addNewRental(@ModelAttribute("addRentalRequest") AddRentalRequest request){
         rentalService.addRental(request);
-        return "employee/panel";
+        return "redirect:/employee/rentals";
     }
 
-    @RequestMapping("/cars/addCar")
+    @RequestMapping("/addCar")
     public String addCarForm(Model model){
         AddCarRequest addCarRequest = new AddCarRequest();
         List<Branch> branches = branchService.findAll();
@@ -88,8 +88,6 @@ public class EmployeeController {
         return "employee/addCar";
     }
 
-
-
     @RequestMapping("/cars")
     public String showCars(Model model){
         List<Car> cars = carService.findAll();
@@ -97,13 +95,13 @@ public class EmployeeController {
         return "employee/cars";
     }
 
-    @GetMapping("/cars/delete")
+    @GetMapping("/deleteCar")
     public String deleteCar(@RequestParam("carId") long id){
         carService.deleteCarById(id);
-        return "employee/panel";
+        return "redirect:/employee/cars";
     }
 
-    @GetMapping("/cars/update")
+    @GetMapping("/updateCar")
     public String updateCar(@RequestParam("carId") long id, Model model){
         Car car = carService.findCarById(id);
         AddCarRequest addCarRequest = new AddCarRequest();
@@ -124,13 +122,13 @@ public class EmployeeController {
     @PostMapping("/saveCar")
     public String saveCar(@ModelAttribute("addCarRequest") AddCarRequest request){
         carService.addCar(request);
-        return "employee/panel";
+        return "redirect:/employee/cars";
     }
 
     @PostMapping("/updateCar")
     public String updateCar(@ModelAttribute("addCarRequest") AddCarRequest request){
         carService.updateCar(request, carId);
-        return "employee/panel";
+        return "redirect:/employee/cars";
     }
 
     @RequestMapping("/")
@@ -164,12 +162,7 @@ public class EmployeeController {
     @RequestMapping("/generateInvoice")
     public String generateInvoice(@RequestParam("rentalId") long id){
         invoiceService.addInvoiceForRental(id);
-        return "employee/panel";
-    }
-
-    @RequestMapping("/panel")
-    public String showPanel(){
-        return "employee/panel";
+        return "redirect:/employee/invoices";
     }
 
     public static void setEmployee(Employee employee) {

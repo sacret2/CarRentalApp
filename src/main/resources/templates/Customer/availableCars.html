@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="customer/template :: index_head">
+<head th:include="template :: index_head">
 </head>
 <body>
-<nav th:replace="customer/template :: navbar"></nav>
+<nav th:replace="template :: navbar"></nav>
 <br>
 <div align="center">
     <br>
@@ -34,13 +34,13 @@
             <td th:text="${tempCar.branch.address.city} +' '+ ${tempCar.branch.address.street} +' '+ ${tempCar.branch.address.streetNumber}"/>
             <td th:with="result=${days * tempCar.basePricePerDay}" th:text="${result}"/>
             <td>
-                <a th:href="@{/customer/availableCars/createReservation(carId=${tempCar.id}, request=${addReservationRequest})}" class="btn btn-success btn-sm">Make Reservation</a>
+                <a th:href="@{/customer/createReservation(carId=${tempCar.id}, request=${addReservationRequest})}" class="btn btn-success btn-sm">Make Reservation</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<footer th:replace="customer/template :: app_footer"></footer>
+<footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="employee/template :: index_head">
-</head>
-<head>
-    <link th:href="@{../css/navbar.css}" rel="stylesheet" />
-    <link th:href="@{../css/styles.css}" rel="stylesheet" />
+<head th:include="template :: index_head">
 </head>
 <body>
-<nav th:replace="employee/template :: navbar"></nav>
+<nav th:replace="template :: navbar"></nav>
 <div align="center">
     <br>
     <h2>Rentals</h2>
@@ -25,7 +21,7 @@
         <tbody>
         <tr class="table table-striped" th:each="rental : ${rentals}">
             <td th:text="${rental.id}"/>
-            <td th:text="${rental.reservation.id}"/>
+            <td th:text="${rental.reservation}"/>
             <td th:text="${rental.returnDate}"/>
             <td th:text="${rental.overduePenalty}"/>
             <td>
@@ -36,6 +32,6 @@
     </table>
 </div>
 
-<footer th:replace="employee/template :: app_footer"></footer>
+<footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

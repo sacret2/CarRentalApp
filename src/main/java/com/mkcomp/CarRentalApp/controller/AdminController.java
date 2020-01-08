@@ -43,12 +43,12 @@ public class AdminController {
         return "admin/branches";
     }
 
-    @RequestMapping("/panel")
+    @RequestMapping("/")
     public String viewPanel(){
         return "admin/panel";
     }
 
-    @RequestMapping("/employees/addEmployee")
+    @RequestMapping("/addEmployee")
     public String addEmployee(Model model){
         AddEmployeeRequest request = new AddEmployeeRequest();
         model.addAttribute("addEmployeeRequest", request);
@@ -57,38 +57,38 @@ public class AdminController {
         return "admin/addEmployee";
     }
 
-    @RequestMapping("/branches/addBranch")
+    @RequestMapping("/addBranch")
     public String addBranch(Model model){
         AddBranchRequest request = new AddBranchRequest();
         model.addAttribute("addBranchRequest", request);
         return "admin/addBranch";
     }
 
-    @PostMapping("/employees/saveEmployee")
+    @PostMapping("/saveEmployee")
     public String saveEmployee(@ModelAttribute("addEmployeeRequest") AddEmployeeRequest request){
         employeeService.addEmployee(request);
-        return "admin/panel";
+        return "redirect:/admin/employees";
     }
 
-    @PostMapping("/branches/saveBranch")
+    @PostMapping("/saveBranch")
     public String saveBranch(@ModelAttribute("addBranchRequest") AddBranchRequest request){
         branchService.addBranch(request);
-        return "admin/panel";
+        return "redirect:/admin/branches";
     }
 
-    @GetMapping("/employees/delete")
+    @GetMapping("/deleteEmployee")
     public String deleteEmployee(@RequestParam("employeeId") long id){
         employeeService.deleteEmployeeById(id);
-        return "admin/panel";
+        return "redirect:/admin/employees";
     }
 
-    @GetMapping("/branches/delete")
+    @GetMapping("/deleteBranch")
     public String deleteBranch(@RequestParam("branchId") long id){
         branchService.deleteBranchById(id);
-        return "admin/panel";
+        return "redirect:/admin/branches";
     }
 
-    @GetMapping("/employees/update")
+    @GetMapping("/updateEmployee")
     public String updateEmployee(@RequestParam("employeeId") long id, Model model){
         Employee employee = employeeService.getEmployeeById(id);
         AddEmployeeRequest request = new AddEmployeeRequest();
@@ -105,7 +105,7 @@ public class AdminController {
         return "admin/addEmployee";
     }
 
-    @GetMapping("/branches/update")
+    @GetMapping("/updateBranch")
     public String updateBranch(@RequestParam("branchId") long id, Model model){
         Branch branch = branchService.getBranchById(id);
         AddBranchRequest request = new AddBranchRequest();

@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="employee/template :: index_head">
-</head>
-<head>
-    <link th:href="@{../css/navbar.css}" rel="stylesheet" />
-    <link th:href="@{../css/styles.css}" rel="stylesheet" />
+<head th:include="template :: index_head">
 </head>
 <body>
-<nav th:replace="employee/template :: navbar"></nav>
-<footer th:replace="employee/template :: app_footer"></footer>
+<nav th:replace="template :: navbar"></nav>
+<footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

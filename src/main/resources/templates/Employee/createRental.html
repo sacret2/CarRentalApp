@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="employee/template :: index_head"/>
-<head>
-    <link th:href="@{css/navbar.css}" rel="stylesheet" />
-    <link th:href="@{css/styles.css}" rel="stylesheet" />
-</head>
+<head th:include="template :: index_head"/>
 <body>
-<nav th:replace="employee/template :: navbar"/>
+<nav th:replace="template :: navbar"/>
 <div align="center">
     <h2>Add car</h2>
     <hr>
     <br>
-    <form action="#" th:action="@{/employee/rentals/add}" th:object="${addRentalRequest}" method="POST">
+    <form action="#" th:action="@{/employee//addRental}" th:object="${addRentalRequest}" method="POST">
         <label for="ReturnDate">Return date</label>
         <input id = "ReturnDate" type="date" th:field="*{returnDate}" class="form-control mb-4 col-4"/>
         <label for="overduePenalty">Overdue Penalty</label>
@@ -20,6 +16,6 @@
         <button type="submit" class="btn btn-primary btn-sm">Add Rental</button>
     </form>
 </div>
-<footer th:replace="employee/template :: app_footer"></footer>
+<footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

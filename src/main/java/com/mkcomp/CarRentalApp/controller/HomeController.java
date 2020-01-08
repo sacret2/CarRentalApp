@@ -5,8 +5,6 @@ import com.mkcomp.CarRentalApp.api.request.LoginRequest;
 import com.mkcomp.CarRentalApp.model.Customer;
 import com.mkcomp.CarRentalApp.model.Employee;
 import com.mkcomp.CarRentalApp.service.CarService;
-import com.mkcomp.CarRentalApp.service.CustomerService;
-import com.mkcomp.CarRentalApp.service.EmployeeService;
 import com.mkcomp.CarRentalApp.service.impl.CustomerServiceImpl;
 import com.mkcomp.CarRentalApp.service.impl.EmployeeServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -44,14 +42,14 @@ public class HomeController {
     public String viewLoginForm(Model model) {
         LoginRequest loginRequest = new LoginRequest();
         model.addAttribute("loginRequest", loginRequest);
-        return "loginForm";
+        return "home/loginForm";
     }
 
     @RequestMapping("/register")
     public String viewRegisterForm(Model model) {
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest();
         model.addAttribute("addCustomerRequest", addCustomerRequest);
-        return "register";
+        return "home/register";
     }
 
     @GetMapping("/login")
@@ -70,7 +68,7 @@ public class HomeController {
             CustomerController.setCustomer(customer);
             return "customer/panel";
         }
-        return "invalid-login";
+        return "home/invalid-login";
     }
 
 

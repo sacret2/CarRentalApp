@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="employee/template :: index_head"/>
-<head>
-    <link th:href="@{../css/navbar.css}" rel="stylesheet" />
-    <link th:href="@{../css/styles.css}" rel="stylesheet" />
-</head>
+<head th:include="template :: index_head"/>
 <body>
-<nav th:replace="employee/template :: navbar"></nav>
+<nav th:replace="template :: navbar"></nav>
 <br>
 <h3>List Of Invoices</h3>
 
@@ -38,8 +34,8 @@
     </table>
 </div>
 <br>
-<a th:href="@{/employee/panel}" class="btn btn-secondary btn-sm mb-3">Return</a>
+<a th:href="@{/employee/}" class="btn btn-secondary btn-sm mb-3">Return</a>
 
-<footer th:replace="employee/template :: app_footer"></footer>
+<footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

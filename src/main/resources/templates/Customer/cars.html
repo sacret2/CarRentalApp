@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="customer/template :: index_head">
-
+<head th:include="template :: index_head">
 </head>
 <body>
-<nav th:replace="customer/template :: navbar"></nav>
+<nav th:replace="template :: navbar"></nav>
 <br>
 <div align="center">
     <table border ="1">
@@ -45,6 +44,6 @@
         </tbody>
     </table>
 </div>
-<footer th:replace="customer/template :: app_footer"></footer>
+<footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

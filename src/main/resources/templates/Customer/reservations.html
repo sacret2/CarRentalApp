@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="customer/template :: index_head">
+<head th:include="template :: index_head">
 </head>
 <body>
-<nav th:replace="customer/template :: navbar"></nav>
+<nav th:replace="template :: navbar"></nav>
 
 <br>
 <div align="center">
@@ -27,7 +27,7 @@
             <td th:text="${reservation.reservationStart}"/>
             <td th:text="${reservation.reservationEnd}"/>
             <td>
-                <a th:href="@{/customer/reservations/delete(reservationId=${reservation.id})}" class="btn btn-danger btn-sm"
+                <a th:href="@{/customer/deleteReservation(reservationId=${reservation.id})}" class="btn btn-danger btn-sm"
                    onclick="if(!(confirm('Are you sure you want to delete this reservation?'))) return false">Delete</a>
             </td>
         </tr>
@@ -35,6 +35,6 @@
     </table>
 </div>
 
-<footer th:replace="customer/template :: app_footer"></footer>
+<footer th:replace="template :: app_footer"></footer>
 </body>
 </html>

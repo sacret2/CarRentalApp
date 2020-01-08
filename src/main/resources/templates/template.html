@@ -7,8 +7,8 @@
 
     <title>M&K</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" th:href="@{css/navbar.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{css/styles.css}" />
+    <link th:href="@{../css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{../css/styles.css}" rel="stylesheet" />
 </head>
 <body>
     <nav th:fragment="navbar" class="navbar navbar-dark bg-dark">
@@ -24,6 +24,8 @@
         </div>
     </nav>
     <footer th:fragment="app_footer" class="footer mt-auto py-3">
+        <br>
+        <br>
         <div class="container">
             <span class="text-muted">M&K Company    Customer Service   email: mk@mk.com,   tel: (+22) 42 32 535,   fax: (+22) 24 35 546</span>
         </div>
