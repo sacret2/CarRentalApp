@@ -7,6 +7,7 @@ import com.mkcomp.CarRentalApp.repository.ReservationRepository;
 import com.mkcomp.CarRentalApp.service.ReservationService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,12 +25,19 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Long addReservation(AddReservationRequest request) {
-        return null;
+        Reservation newReservation = new Reservation();
+        newReservation.setCar(request.getCar());
+        newReservation.setCost(request.getCost());
+        newReservation.setCustomer(request.getCustomer());
+        newReservation.setReservationDate(request.getReservationDate());
+        newReservation.setReservationEnd(request.getReservationEnd());
+        newReservation.setReservationStart(request.getReservationStart());
+        return reservationRepository.save(newReservation).getId();
     }
 
     @Override
     public Set<Reservation> getAllReservations(long customerId) {
-        return null;
+        return new HashSet<Reservation>(reservationRepository.findAll());
     }
 
     @Override

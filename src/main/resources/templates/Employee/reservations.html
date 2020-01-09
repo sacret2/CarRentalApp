@@ -12,8 +12,6 @@
         <thead style="text-align: center">
         <tr>
             <th>Reservation ID</th>
-            <th>Car ID</th>
-            <th>User</th>
             <th>Cost</th>
             <th>Reservation date</th>
             <th>Reservation from</th>
@@ -24,8 +22,6 @@
         <tbody>
         <tr class="table table-striped" th:each="reservation : ${reservations}">
                 <td th:text="${reservation.id}"/>
-                <td th:text="${reservation.car.id}"/>
-                <td th:text="${reservation.customer.userName}"/>
                 <td th:text="${reservation.cost}"/>
                 <td th:text="${reservation.reservationDate}"/>
                 <td th:text="${reservation.reservationStart}"/>

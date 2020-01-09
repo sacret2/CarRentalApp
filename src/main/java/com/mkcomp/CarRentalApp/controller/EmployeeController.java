@@ -14,7 +14,9 @@ import com.mkcomp.CarRentalApp.service.impl.ReservationServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,40 +45,24 @@ public class EmployeeController {
         this.damageService = damageService;
     }
 
-    @RequestMapping("/reservations")
-    public String showReservations(Model model){
-        List<Reservation> reservations = reservationService.findAll();
-        model.addAttribute("reservations", reservations);
-        List<AddRentalRequest> addRentalRequests = new LinkedList<>();
-        for(Reservation reservation : reservations){
-            AddRentalRequest addRentalRequest = new AddRentalRequest();
-            addRentalRequest.setReservation(reservation);
-            addRentalRequests.add(addRentalRequest);
-        }
-        model.addAttribute("addRentalRequests", addRentalRequests);
-        return "employee/reservations";
+    public static void setEmployee(Employee employee) {
+        EmployeeController.employee = employee;
+    }
+    public static Employee getEmployee() {
+        return employee;
     }
 
-    @RequestMapping("/createRental")
-    public String showFormForRental(@RequestParam("reservationId") long reservationId,
-                                    Model model){
-        AddRentalRequest addRentalRequest = new AddRentalRequest();
-        addRentalRequest.setReservation(reservationService.findById(reservationId));
-        model.addAttribute("addRentalRequest", addRentalRequest);
-        return "employee/createRental";
+    @RequestMapping("/")
+    public String viewPanel() {
+        return "employee/panel";
     }
 
-    @RequestMapping("/rental")
-    public String showRental(@RequestParam("rentalId") long rentalId, Model model){
-        Rental rental = rentalService.getRental(rentalId);
-        model.addAttribute("rental", rental);
-        return "employee/rental?rentalId";
-    }
-
-    @PostMapping("/addRental")
-    public String addNewRental(@ModelAttribute("addRentalRequest") AddRentalRequest request){
-        rentalService.addRental(request);
-        return "redirect:/employee/rentals";
+    // ============ CARS ============ BEG
+    @RequestMapping("/cars")
+    public String showCars(Model model){
+        List<Car> cars = carService.findAll();
+        model.addAttribute("cars", cars);
+        return "employee/cars";
     }
 
     @RequestMapping("/addCar")
@@ -86,13 +72,6 @@ public class EmployeeController {
         model.addAttribute("addCarRequest", addCarRequest);
         model.addAttribute("branches", branches);
         return "employee/addCar";
-    }
-
-    @RequestMapping("/cars")
-    public String showCars(Model model){
-        List<Car> cars = carService.findAll();
-        model.addAttribute("cars", cars);
-        return "employee/cars";
     }
 
     @GetMapping("/deleteCar")
@@ -130,33 +109,73 @@ public class EmployeeController {
         carService.updateCar(request, carId);
         return "redirect:/employee/cars";
     }
+    // ============ CARS ============ END
 
-    @RequestMapping("/")
-    public String viewPanel() {
-        return "employee/panel";
+    // ============ RESERVATIONS ============ BEG
+    @RequestMapping("/reservations")
+    public String showReservations(Model model){
+        List<Reservation> reservations = reservationService.findAll();
+        model.addAttribute("reservations", reservations);
+        List<AddRentalRequest> addRentalRequests = new LinkedList<>();
+        for(Reservation reservation : reservations){
+            AddRentalRequest addRentalRequest = new AddRentalRequest();
+            addRentalRequest.setReservation(reservation);
+            addRentalRequests.add(addRentalRequest);
+        }
+        model.addAttribute("addRentalRequests", addRentalRequests);
+        return "employee/reservations";
     }
+    // ============ RESERVATIONS ============ END
 
-    public static Employee getEmployee() {
-        return employee;
-    }
-
-    @RequestMapping("/invoices")
-    public String showInvoices(Model model){
-        List<Invoice> invoices = invoiceService.findAll();
-        model.addAttribute("invoices", invoices);
-        return "employee/invoices";
-    }
-
+    // ============ RENTALS ============ BEG
     @RequestMapping("/rentals")
     public String showRentals(Model model){
         List<Rental> rentals = rentalService.getAllRentals();
+        for(Rental rental : rentals){
+            rental.getReservation().getCar();
+        }
         model.addAttribute("rentals", rentals);
-//        List<Damage> damages = new LinkedList<>();
-//        for(Rental rental : rentals){
-//            damages.add(rental.getDamage());
-//        }
-//        model.addAttribute("damages", damages);
+
         return "employee/rentals";
+    }
+
+    @RequestMapping("/createRental")
+    public String showFormForRental(@RequestParam("reservationId") long reservationId,
+                                    Model model
+                                    ){
+        AddRentalRequest addRentalRequest = new AddRentalRequest();
+        Reservation reservation = reservationService.findById(reservationId);
+        System.out.println(reservation);
+        model.addAttribute("addRentalRequest", addRentalRequest);
+        model.addAttribute("reservation", reservation);
+        return "employee/createRental";
+    }
+
+    @PostMapping("/addRental")
+    public String addNewRental(@ModelAttribute("addRentalRequest") AddRentalRequest request,
+                               @ModelAttribute("reservation") Reservation reservation
+                               ){
+        System.out.println(reservation);
+        rentalService.addRental(request, reservation);
+        return "redirect:/employee/rentals";
+    }
+
+    @RequestMapping("/rental")
+    public String showRental(@RequestParam("rentalId") long rentalId, Model model){
+        Rental rental = rentalService.getRental(rentalId);
+        model.addAttribute("rental", rental);
+        return "employee/rental?rentalId";
+    }
+    // ============ RENTALS ============ END
+
+    // ============ INVOICES ============ BEG
+    @RequestMapping("/invoices")
+    public String showInvoices(Model model){
+        List<Invoice> invoices = invoiceService.findAll();
+        for(Invoice invoice : invoices)
+            invoice.getRental().getReservation().getCustomer();
+        model.addAttribute("invoices", invoices);
+        return "employee/invoices";
     }
 
     @RequestMapping("/generateInvoice")
@@ -164,8 +183,5 @@ public class EmployeeController {
         invoiceService.addInvoiceForRental(id);
         return "redirect:/employee/invoices";
     }
-
-    public static void setEmployee(Employee employee) {
-        EmployeeController.employee = employee;
-    }
+    // ============ INVOICES ============ END
 }

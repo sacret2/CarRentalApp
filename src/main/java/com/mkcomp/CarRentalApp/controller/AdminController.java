@@ -29,23 +29,17 @@ public class AdminController {
         this.employeeService = employeeService;
     }
 
+    @RequestMapping("/")
+    public String viewPanel(){
+        return "admin/panel";
+    }
+
+    // ============ EMPLOYEES ============ BEG
     @RequestMapping("/employees")
     public String viewEmployees(Model model){
         List<Employee> employees = employeeService.findAll();
         model.addAttribute("employees", employees);
         return "admin/employees";
-    }
-
-    @RequestMapping("/branches")
-    public String viewBranches(Model model){
-        List<Branch> branches = branchService.findAll();
-        model.addAttribute("branches", branches);
-        return "admin/branches";
-    }
-
-    @RequestMapping("/")
-    public String viewPanel(){
-        return "admin/panel";
     }
 
     @RequestMapping("/addEmployee")
@@ -57,35 +51,16 @@ public class AdminController {
         return "admin/addEmployee";
     }
 
-    @RequestMapping("/addBranch")
-    public String addBranch(Model model){
-        AddBranchRequest request = new AddBranchRequest();
-        model.addAttribute("addBranchRequest", request);
-        return "admin/addBranch";
-    }
-
     @PostMapping("/saveEmployee")
     public String saveEmployee(@ModelAttribute("addEmployeeRequest") AddEmployeeRequest request){
         employeeService.addEmployee(request);
         return "redirect:/admin/employees";
     }
 
-    @PostMapping("/saveBranch")
-    public String saveBranch(@ModelAttribute("addBranchRequest") AddBranchRequest request){
-        branchService.addBranch(request);
-        return "redirect:/admin/branches";
-    }
-
     @GetMapping("/deleteEmployee")
     public String deleteEmployee(@RequestParam("employeeId") long id){
         employeeService.deleteEmployeeById(id);
         return "redirect:/admin/employees";
-    }
-
-    @GetMapping("/deleteBranch")
-    public String deleteBranch(@RequestParam("branchId") long id){
-        branchService.deleteBranchById(id);
-        return "redirect:/admin/branches";
     }
 
     @GetMapping("/updateEmployee")
@@ -104,6 +79,34 @@ public class AdminController {
         employeeService.deleteEmployeeById(id);
         return "admin/addEmployee";
     }
+    // ============ EMPLOYEES ============ END
+
+    // ============ BRANCHES ============ BEG
+    @RequestMapping("/branches")
+    public String viewBranches(Model model){
+        List<Branch> branches = branchService.findAll();
+        model.addAttribute("branches", branches);
+        return "admin/branches";
+    }
+
+    @RequestMapping("/addBranch")
+    public String addBranch(Model model){
+        AddBranchRequest request = new AddBranchRequest();
+        model.addAttribute("addBranchRequest", request);
+        return "admin/addBranch";
+    }
+
+    @PostMapping("/saveBranch")
+    public String saveBranch(@ModelAttribute("addBranchRequest") AddBranchRequest request){
+        branchService.addBranch(request);
+        return "redirect:/admin/branches";
+    }
+
+    @GetMapping("/deleteBranch")
+    public String deleteBranch(@RequestParam("branchId") long id){
+        branchService.deleteBranchById(id);
+        return "redirect:/admin/branches";
+    }
 
     @GetMapping("/updateBranch")
     public String updateBranch(@RequestParam("branchId") long id, Model model){
@@ -117,6 +120,5 @@ public class AdminController {
         branchService.deleteBranchById(id);
         return "admin/addBranch";
     }
-
-
+    // ============ BRANCHES ============ END
 }

@@ -7,7 +7,8 @@
     <h2>Add car</h2>
     <hr>
     <br>
-    <form action="#" th:action="@{/employee//addRental}" th:object="${addRentalRequest}" method="POST">
+    <form action="#" th:action="@{/employee/addRental}" th:object="${addRentalRequest}" method="POST">
+        <p th:text="${reservation}" />
         <label for="ReturnDate">Return date</label>
         <input id = "ReturnDate" type="date" th:field="*{returnDate}" class="form-control mb-4 col-4"/>
         <label for="overduePenalty">Overdue Penalty</label>

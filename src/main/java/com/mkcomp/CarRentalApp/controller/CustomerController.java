@@ -72,6 +72,12 @@ public class CustomerController {
         this.invoiceService = invoiceService;
     }
 
+    @RequestMapping("/")
+    public String viewPanel() {
+        return "customer/panel";
+    }
+
+    // ============ ACCOUNT ============ BEG
     @PostMapping("/register")
     public String registerCustomer(@ModelAttribute("addCustomerRequest")AddCustomerRequest request, Model model) {
         long customerId = customerService.addCustomer(request);
@@ -83,7 +89,9 @@ public class CustomerController {
         }
         return "index";
     }
+    // ============ ACCOUNT ============ END
 
+    // ============ CARS ============ BEG
     @RequestMapping("/cars")
     public String showCars(Model model){
         List<Car> cars = carService.findAll();
@@ -108,9 +116,8 @@ public class CustomerController {
 
     @GetMapping("/availableCars")
     public String showFoundCars(@ModelAttribute("addReservationRequest") AddReservationRequest request, Model model) {
-
-        LocalDateTime start = request.getReservationStart().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        LocalDateTime end = request.getReservationEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime start = request.getReservationStart();
+        LocalDateTime end = request.getReservationEnd();
         reservation = new Reservation();
         reservation.setReservationDate(LocalDateTime.now());
         reservation.setCustomer(customer);
@@ -125,21 +132,15 @@ public class CustomerController {
         model.addAttribute("days", numOfDays);
         return "customer/availableCars";
     }
+    // ============ CARS ============ END
 
-    @RequestMapping("/")
-    public String viewPanel() {
-        return "customer/panel";
-    }
-
-
+    // ============ RESERVATIONS ============ BEG
     @RequestMapping("/reservations")
     public String viewReservations(Model model){
         List<Reservation> reservations = reservationService.findReservationsByCustomer(customer);
         model.addAttribute("reservations", reservations);
-
         return "customer/reservations";
     }
-
 
     @RequestMapping("/createReservation")
     public String createReservation(@RequestParam("carId") long carId,
@@ -159,12 +160,15 @@ public class CustomerController {
         reservationService.deleteReservation(id);
         return "redirect:/customer/reservations";
     }
+    // ============ RESERVATIONS ============ END
 
+    // ============ INVOICES ============ BEG
     @RequestMapping("/invoices")
     public String viewInvoices(Model model){
         List<Invoice> invoices = invoiceService.findAllByCustomer(customer);
         model.addAttribute("invoices", invoices);
         return "customer/invoices";
     }
+    // ============ INVOICES ============ END
 
 }

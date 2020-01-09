@@ -3,6 +3,7 @@ package com.mkcomp.CarRentalApp.service.impl;
 import com.mkcomp.CarRentalApp.api.request.AddRentalRequest;
 import com.mkcomp.CarRentalApp.model.Damage;
 import com.mkcomp.CarRentalApp.model.Rental;
+import com.mkcomp.CarRentalApp.model.Reservation;
 import com.mkcomp.CarRentalApp.repository.DamageRepository;
 import com.mkcomp.CarRentalApp.repository.RentalRepository;
 import com.mkcomp.CarRentalApp.service.RentalService;
@@ -29,15 +30,15 @@ public class RentalServiceImpl implements RentalService {
      * Additionally saves a Damage object associated with the Rental being saved
      */
     @Override
-    public Long addRental(AddRentalRequest request) {
+    public Long addRental(AddRentalRequest request, Reservation reservation) {
         Rental rental = new Rental();
         rental.setOverduePenalty(request.getOverduePenalty());
-        rental.setReservation(request.getReservation());
+        rental.setReservation(reservation);
         LocalDateTime returnDate = request.getReturnDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         rental.setReturnDate(returnDate);
         rental.setWasOverdue(request.isWasOverdue());
         Damage damage = new Damage();
-        damageRepository.save(new Damage());
+        damageRepository.save(damage);
         rental.setDamage(damage);
         rentalRepository.save(rental);
         System.out.println(rental);

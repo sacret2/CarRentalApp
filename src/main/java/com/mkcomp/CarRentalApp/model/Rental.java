@@ -14,11 +14,11 @@ public class Rental {
     private double overduePenalty;
     private LocalDateTime returnDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "damage_id")
     private Damage damage;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 

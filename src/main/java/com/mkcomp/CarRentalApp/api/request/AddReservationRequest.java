@@ -23,9 +23,9 @@ public class AddReservationRequest {
      * DateTimeFormat pattern needed for parsing data from HTML
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date reservationStart;
+    private LocalDateTime reservationStart;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date reservationEnd;
+    private LocalDateTime reservationEnd;
     private Car car;
     private Customer customer;
     private long branchId;
@@ -61,19 +61,19 @@ public class AddReservationRequest {
         this.reservationDate = reservationDate;
     }
 
-    public Date getReservationStart() {
+    public LocalDateTime getReservationStart() {
         return reservationStart;
     }
 
-    public void setReservationStart(Date reservationStart) {
+    public void setReservationStart(LocalDateTime reservationStart) {
         this.reservationStart = reservationStart;
     }
 
-    public Date getReservationEnd() {
+    public LocalDateTime getReservationEnd() {
         return reservationEnd;
     }
 
-    public void setReservationEnd(Date reservationEnd) {
+    public void setReservationEnd(LocalDateTime reservationEnd) {
         this.reservationEnd = reservationEnd;
     }
 

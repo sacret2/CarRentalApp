@@ -14,16 +14,16 @@ public class Reservation {
     private LocalDateTime reservationStart;
     private LocalDateTime reservationEnd;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id")
     private Car car;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
     private double cost;
 
-    @OneToOne(mappedBy ="reservation", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy ="reservation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "rental_id")
     private Rental rental;
 
